@@ -170,7 +170,7 @@ textarea:focus-visible {
 <main>
 <div class="eyebrow">FIELD QUICK REFERENCE</div>
 <h1>Chainsaw Sharpening</h1>
-<p class="muted">Reference update: pitch and gauge selection • v6</p>
+<p class="muted">Reference update: pitch and gauge selection • v7</p>
 <p class="muted">
 Choose chain pitch and gauge to view sharpening
 reference lines from your chart.
@@ -264,7 +264,7 @@ Cancel
 <script>
 "use strict";
 
-// Pitch choices: 3/8 LP removed.
+// 3/8 LP pitch button removed.
 const P=[".325″","3/8″",".404″","1/4″"];
 
 const G=[
@@ -274,7 +274,12 @@ const G=[
   ".063″ / 1.6 mm"
 ];
 
+// Preserve saved edits from versions 5 and 6.
 const KEY="chainsaw-user-references-v6";
+
+// PDF chart rows:
+// model, gauge, vise, top angle, tilt,
+// Windsor, Sarp, Carlton, Stihl, EM.
 
 const ROWS_325=[
 ["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
@@ -377,10 +382,13 @@ function escapeHTML(s){
   }[c]));
 }
 
+// VERSION 7 GAUGE RULE:
+// .043 is visible ONLY when 3/8 pitch is selected.
+// It is hidden for .325, .404 and 1/4.
+
 function availableGauges(){
-  // Hide .043 only for the .325 pitch.
   return G.filter(g=>!(
-    pitch===".325″" && g===G[0]
+    pitch!=="3/8″" && g===G[0]
   ));
 }
 
@@ -435,6 +443,8 @@ function allEntries(){
 function render(){
   const allowed=availableGauges();
 
+  // Automatically select a visible gauge
+  // when switching between pitch tabs.
   if(!allowed.includes(gauge)){
     gauge=allowed[0];
   }
@@ -668,8 +678,8 @@ $("file").onchange=async e=>{
   e.target.value="";
 };
 
-// Unregister old service workers that could
-// serve an outdated version of index.html.
+// Unregister old service workers that might
+// serve outdated copies of the app.
 if("serviceWorker" in navigator){
   navigator.serviceWorker.getRegistrations()
     .then(regs=>regs.forEach(reg=>reg.unregister()))
