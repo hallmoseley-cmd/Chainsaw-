@@ -6,51 +6,175 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10151c">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Chain Ref">
 <title>Chainsaw Sharpening Reference</title>
 <style>
-:root{color-scheme:dark;--bg:#0e1218;--card:#1b232e;--line:#354252;--text:#f6f8fc;--muted:#b7c5d5;--yellow:#ffdf39}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:760px;margin:auto;padding:20px 16px 70px}
-h1{font-size:27px;margin:5px 0}
-h2{font-size:16px;margin:0 0 13px}
-p{line-height:1.5}
-.eyebrow{color:var(--yellow);font-size:11px;font-weight:850;letter-spacing:2px}
-.muted{color:var(--muted);font-size:13px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;margin-top:15px}
-.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.choices button{min-height:70px;background:#2a3543;color:white;border:2px solid #455264;border-radius:13px;font-size:23px;font-weight:850;cursor:pointer}
-.choices button[aria-pressed=true],.gauge button[aria-pressed=true]{background:var(--yellow);color:#111;border-color:#fff}
-.gauge{display:flex;flex-wrap:wrap;gap:8px}
-.gauge button{border:1px solid #647387;border-radius:11px;padding:13px;background:#2a3543;color:white;font-weight:800;min-height:48px;cursor:pointer}
-.selected{background:#3d391e;border-color:#b69e21}
-.selected .big{font-size:29px;font-weight:900;color:var(--yellow)}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap}
-.action{background:#2c394a;border:1px solid #6b7c8f;color:white;border-radius:11px;padding:12px 14px;min-height:46px;font-weight:750;cursor:pointer}
-.action.primary{background:var(--yellow);border-color:var(--yellow);color:#101318}
-.entry{border:2px solid var(--yellow);border-radius:13px;padding:14px;margin-top:10px;background:#34321f}
-.entry h3{font-size:19px;margin:0 0 9px}
-.spec{display:grid;grid-template-columns:42% 1fr;border-top:1px solid #596071;padding:9px 0;gap:8px}
-.spec span:first-child{color:#c2ccda;font-size:13px}
-.spec strong{overflow-wrap:anywhere}
-.entry .toolbar{margin-top:10px}
-label{display:block;color:#c9d4e0;font-size:13px;font-weight:750;margin-top:12px}
-input,textarea{display:block;width:100%;font:inherit;background:#111923;color:white;border:1px solid #718198;border-radius:9px;padding:12px;margin-top:5px}
-textarea{min-height:85px}
-dialog{width:min(94vw,560px);border:1px solid #748294;border-radius:17px;background:#1b232e;color:white;padding:18px}
-dialog::backdrop{background:#000b}
-.empty{border:1px dashed #66758a;border-radius:12px;padding:18px;color:#c9d4e0}
-.footer{font-size:12px;color:#9aaabc;margin-top:23px;line-height:1.6}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid white;outline-offset:2px}
-@media(min-width:600px){.choices{grid-template-columns:repeat(4,1fr)}}
+:root {
+  color-scheme:dark;
+  --bg:#0e1218;
+  --card:#1b232e;
+  --line:#354252;
+  --text:#f6f8fc;
+  --muted:#b7c5d5;
+  --yellow:#ffdf39;
+}
+* {box-sizing:border-box}
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+main {max-width:760px;margin:auto;padding:20px 16px 70px}
+h1 {font-size:27px;margin:5px 0}
+h2 {font-size:16px;margin:0 0 13px}
+p {line-height:1.5}
+.eyebrow {
+  color:var(--yellow);
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:2px;
+}
+.muted {color:var(--muted);font-size:13px}
+.panel {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:16px;
+  margin-top:15px;
+}
+.choices {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.choices button {
+  min-height:70px;
+  background:#2a3543;
+  color:#fff;
+  border:2px solid #455264;
+  border-radius:13px;
+  font-size:23px;
+  font-weight:850;
+  cursor:pointer;
+}
+.choices button[aria-pressed=true],
+.gauge button[aria-pressed=true] {
+  background:var(--yellow);
+  color:#111;
+  border-color:#fff;
+}
+.gauge {display:flex;flex-wrap:wrap;gap:8px}
+.gauge button {
+  border:1px solid #647387;
+  border-radius:11px;
+  padding:13px;
+  background:#2a3543;
+  color:#fff;
+  font-weight:800;
+  min-height:48px;
+  cursor:pointer;
+}
+.selected {background:#3d391e;border-color:#b69e21}
+.selected .big {
+  font-size:29px;
+  font-weight:900;
+  color:var(--yellow);
+}
+.toolbar {display:flex;gap:9px;flex-wrap:wrap}
+.action {
+  background:#2c394a;
+  border:1px solid #6b7c8f;
+  color:#fff;
+  border-radius:11px;
+  padding:12px 14px;
+  min-height:46px;
+  font-weight:750;
+  cursor:pointer;
+}
+.action.primary {
+  background:var(--yellow);
+  border-color:var(--yellow);
+  color:#101318;
+}
+.entry {
+  border:2px solid var(--yellow);
+  border-radius:13px;
+  padding:14px;
+  margin-top:10px;
+  background:#34321f;
+}
+.entry h3 {font-size:19px;margin:0 0 9px}
+.spec {
+  display:grid;
+  grid-template-columns:42% 1fr;
+  border-top:1px solid #596071;
+  padding:9px 0;
+  gap:8px;
+}
+.spec span:first-child {color:#c2ccda;font-size:13px}
+.spec strong {overflow-wrap:anywhere}
+.entry .toolbar {margin-top:10px}
+label {
+  display:block;
+  color:#c9d4e0;
+  font-size:13px;
+  font-weight:750;
+  margin-top:12px;
+}
+input,textarea {
+  display:block;
+  width:100%;
+  font:inherit;
+  background:#111923;
+  color:white;
+  border:1px solid #718198;
+  border-radius:9px;
+  padding:12px;
+  margin-top:5px;
+}
+textarea {min-height:85px}
+dialog {
+  width:min(94vw,560px);
+  border:1px solid #748294;
+  border-radius:17px;
+  background:#1b232e;
+  color:white;
+  padding:18px;
+}
+dialog::backdrop {background:#000b}
+.empty {
+  border:1px dashed #66758a;
+  border-radius:12px;
+  padding:18px;
+  color:#c9d4e0;
+}
+.footer {
+  font-size:12px;
+  color:#9aaabc;
+  margin-top:23px;
+  line-height:1.6;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline:3px solid white;
+  outline-offset:2px;
+}
+@media(min-width:600px) {
+  .choices {grid-template-columns:repeat(4,1fr)}
+}
 </style>
 </head>
 <body>
 <main>
 <div class="eyebrow">FIELD QUICK REFERENCE</div>
 <h1>Chainsaw Sharpening</h1>
-<p class="muted">Reference update: 3/8″ chart entries • v5</p>
-<p class="muted">Choose chain pitch and gauge to view sharpening reference lines from your chart.</p>
+<p class="muted">Reference update: pitch and gauge selection • v6</p>
+<p class="muted">
+Choose chain pitch and gauge to view sharpening
+reference lines from your chart.
+</p>
 
 <section class="panel">
 <h2>1. Select chain pitch</h2>
@@ -71,37 +195,68 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 <section class="panel">
 <h2>Matching reference lines</h2>
 <div class="toolbar">
-<button class="action primary" id="add">+ Add reference line</button>
+<button class="action primary" id="add">
++ Add reference line
+</button>
 </div>
 <div id="entries"></div>
 </section>
 
 <section class="panel">
 <h2>Manage reference data</h2>
-<p class="muted">Built-in PDF references are included in the app. Your added or edited entries are stored on this device. Export a backup before clearing browser data.</p>
+<p class="muted">
+Built-in PDF references are included in this app.
+Your added or edited entries are stored on this device.
+Export a backup before clearing browser data.
+</p>
 <div class="toolbar">
 <button class="action" id="export">Export backup</button>
 <button class="action" id="import">Import backup</button>
-<input id="file" type="file" accept=".json,application/json" hidden>
+<input id="file" type="file"
+accept=".json,application/json" hidden>
 </div>
 </section>
 
-<p class="footer">Verify all specifications against current chain manufacturer instructions. Pitch and gauge alone do not uniquely determine sharpening specifications. This app is a convenience reference, not an approved manufacturer document.</p>
+<p class="footer">
+Verify all specifications against current chain
+manufacturer instructions. Pitch and gauge alone
+do not uniquely determine sharpening specifications.
+This app is a convenience reference, not an
+approved manufacturer document.
+</p>
 </main>
 
 <dialog id="editor">
 <form id="form">
 <h2 id="editorTitle">Reference line</h2>
-<label>Chain model<input id="model" required maxlength="120"></label>
-<label>Grinding wheel width<input id="wheelWidth"></label>
-<label>Vise angle<input id="viseAngle"></label>
-<label>Top-plate angle<input id="topAngle"></label>
-<label>Tilt angle<input id="sideAngle"></label>
-<label>Depth gauge<input id="depth"></label>
-<label>Notes<textarea id="notes"></textarea></label>
+<label>Chain model
+<input id="model" required maxlength="120">
+</label>
+<label>Grinding wheel width
+<input id="wheelWidth">
+</label>
+<label>Vise angle
+<input id="viseAngle">
+</label>
+<label>Top-plate angle
+<input id="topAngle">
+</label>
+<label>Tilt angle
+<input id="sideAngle">
+</label>
+<label>Depth gauge
+<input id="depth">
+</label>
+<label>Notes
+<textarea id="notes"></textarea>
+</label>
 <div class="toolbar" style="margin-top:18px">
-<button type="submit" class="action primary">Save reference</button>
-<button type="button" class="action" id="cancel">Cancel</button>
+<button type="submit" class="action primary">
+Save reference
+</button>
+<button type="button" class="action" id="cancel">
+Cancel
+</button>
 </div>
 </form>
 </dialog>
@@ -109,24 +264,17 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 <script>
 "use strict";
 
-const P=[".325″","3/8″","3/8″ LP",".404″","1/4″"];
+// Pitch choices: 3/8 LP removed.
+const P=[".325″","3/8″",".404″","1/4″"];
+
 const G=[
-".043″ / 1.1 mm",
-".050″ / 1.3 mm",
-".058″ / 1.5 mm",
-".063″ / 1.6 mm"
+  ".043″ / 1.1 mm",
+  ".050″ / 1.3 mm",
+  ".058″ / 1.5 mm",
+  ".063″ / 1.6 mm"
 ];
 
-const KEY="chainsaw-user-references-v5";
-
-/*
-PDF data columns:
-model | gauge | vise angle | top plate angle |
-tilt angle | Windsor | Sarp | Carlton | Stihl | EM
-
-All entries below are embedded directly in this HTML.
-They do not depend on localStorage or another file.
-*/
+const KEY="chainsaw-user-references-v6";
 
 const ROWS_325=[
 ["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
@@ -170,40 +318,45 @@ const ROWS_375=[
 ];
 
 const GAUGE_MAP={
-43:G[0],
-50:G[1],
-58:G[2],
-63:G[3]
+  43:G[0],
+  50:G[1],
+  58:G[2],
+  63:G[3]
 };
 
 function makeEntries(rows,pitch,prefix){
- return rows.map((r,i)=>{
-  const brands={Oregon:r[0]};
-  ["Windsor","Sarp","Carlton","Stihl","EM"].forEach((name,j)=>{
-   if(r[j+5])brands[name]=r[j+5];
+  return rows.map((r,i)=>{
+    const brands={Oregon:r[0]};
+
+    ["Windsor","Sarp","Carlton","Stihl","EM"]
+      .forEach((name,j)=>{
+        if(r[j+5])brands[name]=r[j+5];
+      });
+
+    return {
+      id:prefix+"-"+String(i+1).padStart(2,"0"),
+      pitch:pitch,
+      gauge:GAUGE_MAP[r[1]],
+      model:r[0],
+      viseAngle:r[2]+"°",
+      topAngle:r[3]+"°",
+      sideAngle:r[4]+"°",
+      wheelWidth:pitch===".325″"
+        ?"1/8″ / 3.2 mm"
+        :r[0]==="91P"
+          ?""
+          :"1/8″ / 3.2 mm – 3/16″ / 4.8 mm",
+      depth:".025″ / 0.63 mm",
+      brands:brands,
+      notes:"Source: Chainsaw Sharpening.pdf — DIMENSIONS table. Verify against manufacturer instructions.",
+      source:"pdf"
+    };
   });
-  return {
-   id:prefix+"-"+String(i+1).padStart(2,"0"),
-   pitch,
-   gauge:GAUGE_MAP[r[1]],
-   model:r[0],
-   viseAngle:r[2]+"°",
-   topAngle:r[3]+"°",
-   sideAngle:r[4]+"°",
-   wheelWidth:pitch===".325″"
-     ?"1/8″ / 3.2 mm"
-     :r[0]==="91P"?"":"1/8″ / 3.2 mm – 3/16″ / 4.8 mm",
-   depth:".025″ / 0.63 mm",
-   brands,
-   notes:"Source: Chainsaw Sharpening.pdf — DIMENSIONS table. Verify against manufacturer instructions.",
-   source:"pdf"
-  };
- });
 }
 
 const BUILTIN=[
- ...makeEntries(ROWS_325,".325″","pdf-325"),
- ...makeEntries(ROWS_375,"3/8″","pdf-375")
+  ...makeEntries(ROWS_325,".325″","pdf-325"),
+  ...makeEntries(ROWS_375,"3/8″","pdf-375")
 ];
 
 let pitch=".325″";
@@ -215,216 +368,312 @@ let hiddenIds=[];
 const $=id=>document.getElementById(id);
 
 function escapeHTML(s){
- return String(s??"").replace(/[&<>"']/g,c=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
- }[c]));
+  return String(s??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
+}
+
+function availableGauges(){
+  // Hide .043 only for the .325 pitch.
+  return G.filter(g=>!(
+    pitch===".325″" && g===G[0]
+  ));
 }
 
 function load(){
- try{
-  const saved=JSON.parse(localStorage.getItem(KEY)||"{}");
-  if(Array.isArray(saved.custom))custom=saved.custom;
-  if(Array.isArray(saved.hiddenIds))hiddenIds=saved.hiddenIds;
- }catch(e){}
+  try{
+    const saved=JSON.parse(
+      localStorage.getItem(KEY)||
+      localStorage.getItem("chainsaw-user-references-v5")||
+      "{}"
+    );
+
+    if(Array.isArray(saved.custom)){
+      custom=saved.custom.filter(x=>
+        x&&typeof x.id==="string"&&
+        P.includes(x.pitch)&&G.includes(x.gauge)
+      );
+    }
+
+    if(Array.isArray(saved.hiddenIds)){
+      hiddenIds=saved.hiddenIds;
+    }
+  }catch(e){}
 }
 
 function save(){
- try{
-  localStorage.setItem(KEY,JSON.stringify({custom,hiddenIds}));
- }catch(e){
-  alert("Unable to save changes on this device.");
- }
+  try{
+    localStorage.setItem(
+      KEY,
+      JSON.stringify({custom,hiddenIds})
+    );
+  }catch(e){
+    alert("Unable to save changes on this device.");
+  }
 }
 
 function allEntries(){
- const replacements=new Map(custom.map(x=>[x.id,x]));
- const builtins=BUILTIN
-  .filter(x=>!hiddenIds.includes(x.id))
-  .map(x=>replacements.get(x.id)||x);
- const extras=custom.filter(x=>!BUILTIN.some(b=>b.id===x.id));
- return [...builtins,...extras];
+  const replacements=new Map(
+    custom.map(x=>[x.id,x])
+  );
+
+  const builtins=BUILTIN
+    .filter(x=>!hiddenIds.includes(x.id))
+    .map(x=>replacements.get(x.id)||x);
+
+  const extras=custom.filter(x=>
+    !BUILTIN.some(b=>b.id===x.id)
+  );
+
+  return [...builtins,...extras];
 }
 
 function render(){
- $("pitches").innerHTML=P.G.filter(g=>!(pitch===".325″" && g===".043″ / 1.1 mm")).map(g=>
-  `<button type="button" data-pitch="${escapeHTML(p)}" aria-pressed="${p===pitch}">${escapeHTML(p)}</button>`
- ).join("");
+  const allowed=availableGauges();
 
- $("gauges").innerHTML=G.map(g=>
-  `<button type="button" data-gauge="${escapeHTML(g)}" aria-pressed="${g===gauge}">${escapeHTML(g)}</button>`
- ).join("");
+  if(!allowed.includes(gauge)){
+    gauge=allowed[0];
+  }
 
- $("current").textContent=pitch+" / "+gauge;
+  $("pitches").innerHTML=P.map(p=>
+    `<button type="button"
+      data-pitch="${escapeHTML(p)}"
+      aria-pressed="${p===pitch}">
+      ${escapeHTML(p)}
+    </button>`
+  ).join("");
 
- const matches=allEntries().filter(x=>
-  x.pitch===pitch&&x.gauge===gauge
- );
+  $("gauges").innerHTML=allowed.map(g=>
+    `<button type="button"
+      data-gauge="${escapeHTML(g)}"
+      aria-pressed="${g===gauge}">
+      ${escapeHTML(g)}
+    </button>`
+  ).join("");
 
- $("count").textContent=matches.length+" matching reference lines";
+  $("current").textContent=pitch+" / "+gauge;
 
- if(!matches.length){
-  $("entries").innerHTML=
-   '<div class="empty">No reference lines for this combination. Use Add reference line to enter a verified chain model.</div>';
-  return;
- }
+  const matches=allEntries().filter(x=>
+    x.pitch===pitch&&x.gauge===gauge
+  );
 
- $("entries").innerHTML=matches.map(x=>{
-  const fields=[
-   ["Gauge",x.gauge],
-   ["Vise angle",x.viseAngle],
-   ["Top-plate angle",x.topAngle],
-   ["Tilt angle",x.sideAngle],
-   ["Depth gauge",x.depth],
-   ["Wheel width",x.wheelWidth],
-   ...Object.entries(x.brands||{}),
-   ["Notes",x.notes]
-  ].filter(([k,v])=>v);
+  $("count").textContent=
+    matches.length+" matching reference lines";
 
-  return `<article class="entry">
-   <h3>${escapeHTML(x.model)}</h3>
-   ${fields.map(([k,v])=>
-    `<div class="spec"><span>${escapeHTML(k)}</span><strong>${escapeHTML(v)}</strong></div>`
-   ).join("")}
-   <div class="toolbar">
-    <button class="action" data-edit="${escapeHTML(x.id)}">Edit</button>
-    <button class="action" data-delete="${escapeHTML(x.id)}">Delete</button>
-   </div>
-  </article>`;
- }).join("");
+  if(!matches.length){
+    $("entries").innerHTML=
+      '<div class="empty">No reference lines for this combination. Use Add reference line to enter a verified chain model.</div>';
+    return;
+  }
+
+  $("entries").innerHTML=matches.map(x=>{
+    const fields=[
+      ["Gauge",x.gauge],
+      ["Vise angle",x.viseAngle],
+      ["Top-plate angle",x.topAngle],
+      ["Tilt angle",x.sideAngle],
+      ["Depth gauge",x.depth],
+      ["Wheel width",x.wheelWidth],
+      ...Object.entries(x.brands||{}),
+      ["Notes",x.notes]
+    ].filter(([k,v])=>v);
+
+    return `<article class="entry">
+      <h3>${escapeHTML(x.model)}</h3>
+      ${fields.map(([k,v])=>
+        `<div class="spec">
+          <span>${escapeHTML(k)}</span>
+          <strong>${escapeHTML(v)}</strong>
+        </div>`
+      ).join("")}
+      <div class="toolbar">
+        <button class="action"
+          data-edit="${escapeHTML(x.id)}">
+          Edit
+        </button>
+        <button class="action"
+          data-delete="${escapeHTML(x.id)}">
+          Delete
+        </button>
+      </div>
+    </article>`;
+  }).join("");
 }
 
 function openEditor(id=null){
- editing=id;
- const x=allEntries().find(v=>v.id===id)||{};
- $("editorTitle").textContent=id?"Edit reference line":"Add reference line";
- for(const k of [
-  "model","wheelWidth","viseAngle","topAngle",
-  "sideAngle","depth","notes"
- ]){
-  $(k).value=x[k]||"";
- }
- $("editor").showModal();
+  editing=id;
+
+  const x=allEntries().find(v=>v.id===id)||{};
+
+  $("editorTitle").textContent=
+    id?"Edit reference line":"Add reference line";
+
+  for(const k of [
+    "model","wheelWidth","viseAngle",
+    "topAngle","sideAngle","depth","notes"
+  ]){
+    $(k).value=x[k]||"";
+  }
+
+  $("editor").showModal();
 }
 
 document.addEventListener("click",e=>{
- const p=e.target.closest("[data-pitch]");
- const g=e.target.closest("[data-gauge]");
- const ed=e.target.closest("[data-edit]");
- const del=e.target.closest("[data-delete]");
+  const p=e.target.closest("[data-pitch]");
+  const g=e.target.closest("[data-gauge]");
+  const ed=e.target.closest("[data-edit]");
+  const del=e.target.closest("[data-delete]");
 
- if(p){pitch=p.dataset.pitch;render();}
- if(g){gauge=g.dataset.gauge;render();}
- if(ed)openEditor(ed.dataset.edit);
-
- if(del&&confirm("Delete this reference line?")){
-  const id=del.dataset.delete;
-  custom=custom.filter(x=>x.id!==id);
-  if(BUILTIN.some(x=>x.id===id)&&!hiddenIds.includes(id)){
-   hiddenIds.push(id);
+  if(p){
+    pitch=p.dataset.pitch;
+    render();
   }
-  save();
-  render();
- }
+
+  if(g){
+    gauge=g.dataset.gauge;
+    render();
+  }
+
+  if(ed){
+    openEditor(ed.dataset.edit);
+  }
+
+  if(del&&confirm("Delete this reference line?")){
+    const id=del.dataset.delete;
+
+    custom=custom.filter(x=>x.id!==id);
+
+    if(
+      BUILTIN.some(x=>x.id===id)&&
+      !hiddenIds.includes(id)
+    ){
+      hiddenIds.push(id);
+    }
+
+    save();
+    render();
+  }
 });
 
 $("add").onclick=()=>openEditor();
+
 $("cancel").onclick=()=>$("editor").close();
 
 $("form").onsubmit=e=>{
- e.preventDefault();
- const old=editing?allEntries().find(x=>x.id===editing):null;
+  e.preventDefault();
 
- const item={
-  ...(old||{}),
-  id:editing||(
-   window.crypto&&crypto.randomUUID
-    ?crypto.randomUUID()
-    :"custom-"+Date.now()
-  ),
-  pitch:old?old.pitch:pitch,
-  gauge:old?old.gauge:gauge,
-  source:"user"
- };
+  const old=editing
+    ?allEntries().find(x=>x.id===editing)
+    :null;
 
- for(const k of [
-  "model","wheelWidth","viseAngle","topAngle",
-  "sideAngle","depth","notes"
- ]){
-  item[k]=$(k).value.trim();
- }
+  const item={
+    ...(old||{}),
+    id:editing||(
+      window.crypto&&crypto.randomUUID
+        ?crypto.randomUUID()
+        :"custom-"+Date.now()
+    ),
+    pitch:old?old.pitch:pitch,
+    gauge:old?old.gauge:gauge,
+    source:"user"
+  };
 
- custom=custom.filter(x=>x.id!==item.id);
- custom.push(item);
- hiddenIds=hiddenIds.filter(id=>id!==item.id);
+  for(const k of [
+    "model","wheelWidth","viseAngle",
+    "topAngle","sideAngle","depth","notes"
+  ]){
+    item[k]=$(k).value.trim();
+  }
 
- save();
- $("editor").close();
- render();
+  custom=custom.filter(x=>x.id!==item.id);
+  custom.push(item);
+
+  hiddenIds=hiddenIds.filter(id=>id!==item.id);
+
+  save();
+  $("editor").close();
+  render();
 };
 
 $("export").onclick=()=>{
- const blob=new Blob([
-  JSON.stringify({version:5,custom,hiddenIds},null,2)
- ],{type:"application/json"});
+  const blob=new Blob([
+    JSON.stringify({
+      version:6,
+      custom,
+      hiddenIds
+    },null,2)
+  ],{type:"application/json"});
 
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
- a.href=url;
- a.download="chainsaw-reference-backup.json";
- a.click();
- setTimeout(()=>URL.revokeObjectURL(url),1000);
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download="chainsaw-reference-backup.json";
+  a.click();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
 $("import").onclick=()=>$("file").click();
 
 $("file").onchange=async e=>{
- const f=e.target.files[0];
- if(!f)return;
+  const f=e.target.files[0];
+  if(!f)return;
 
- try{
-  const parsed=JSON.parse(await f.text());
-  let incoming,hidden=[];
+  try{
+    const parsed=JSON.parse(await f.text());
+    let incoming;
+    let hidden=[];
 
-  if(parsed.version===5&&Array.isArray(parsed.custom)){
-   incoming=parsed.custom;
-   hidden=Array.isArray(parsed.hiddenIds)?parsed.hiddenIds:[];
-  }else if(parsed.version===1&&Array.isArray(parsed.entries)){
-   incoming=parsed.entries.filter(x=>x.source!=="pdf");
-  }else{
-   throw Error("Invalid backup format");
+    if(
+      [5,6].includes(parsed.version)&&
+      Array.isArray(parsed.custom)
+    ){
+      incoming=parsed.custom;
+      hidden=Array.isArray(parsed.hiddenIds)
+        ?parsed.hiddenIds:[];
+    }else if(
+      parsed.version===1&&
+      Array.isArray(parsed.entries)
+    ){
+      incoming=parsed.entries.filter(
+        x=>x.source!=="pdf"
+      );
+    }else{
+      throw Error("Invalid backup format");
+    }
+
+    if(!incoming.every(x=>
+      x&&typeof x.id==="string"&&
+      typeof x.model==="string"&&
+      P.includes(x.pitch)&&G.includes(x.gauge)
+    )){
+      throw Error("Invalid entries");
+    }
+
+    if(confirm("Replace your saved edits with this backup?")){
+      custom=incoming;
+      hiddenIds=hidden;
+      save();
+      render();
+    }
+  }catch(err){
+    alert("Unable to import this backup.");
   }
 
-  if(!incoming.every(x=>
-   x&&typeof x.id==="string"&&
-   typeof x.model==="string"&&
-   P.includes(x.pitch)&&G.includes(x.gauge)
-  )){
-   throw Error("Invalid entries");
-  }
-
-  if(confirm("Replace your saved edits with this backup?")){
-   custom=incoming;
-   hiddenIds=hidden;
-   save();
-   render();
-  }
- }catch(err){
-  alert("Unable to import this backup.");
- }
-
- e.target.value="";
+  e.target.value="";
 };
 
-// Remove any previously installed service worker
-// that might serve an outdated version of the app.
+// Unregister old service workers that could
+// serve an outdated version of index.html.
 if("serviceWorker" in navigator){
- navigator.serviceWorker.getRegistrations()
-  .then(regs=>regs.forEach(reg=>reg.unregister()))
-  .catch(()=>{});
+  navigator.serviceWorker.getRegistrations()
+    .then(regs=>regs.forEach(reg=>reg.unregister()))
+    .catch(()=>{});
 }
 
 load();
