@@ -20,7 +20,9 @@
  --yellow:#ffdf39;
 }
 
-*{box-sizing:border-box}
+*{
+ box-sizing:border-box;
+}
 
 body{
  margin:0;
@@ -51,7 +53,9 @@ h3{
  margin:0 0 10px;
 }
 
-p{line-height:1.5}
+p{
+ line-height:1.5;
+}
 
 .muted{
  color:var(--muted);
@@ -140,12 +144,6 @@ p{line-height:1.5}
  min-height:46px;
  font-weight:750;
  cursor:pointer;
-}
-
-.primary{
- background:var(--yellow);
- border-color:var(--yellow);
- color:#101318;
 }
 
 .entry{
@@ -246,7 +244,7 @@ textarea:focus-visible{
 <h1>Chainsaw Sharpening</h1>
 
 <p class="version">
-Version 14 — Sharpening Reference
+Version 15 — Sharpening Reference
 </p>
 
 <p class="muted">
@@ -272,13 +270,6 @@ reference lines from your original chart.
 
 <section class="panel">
 <h2>Matching reference lines</h2>
-
-<div class="toolbar">
-<button class="action primary" id="add">
-+ Add reference line
-</button>
-</div>
-
 <div id="entries"></div>
 </section>
 
@@ -286,9 +277,9 @@ reference lines from your original chart.
 <h2>Manage reference data</h2>
 
 <p class="muted">
-Your added and edited sharpening reference lines
-are saved in this browser. Export a backup before
-clearing browser data or switching devices.
+Your edited sharpening reference lines are saved
+in this browser. Export a backup before clearing
+browser data or switching devices.
 </p>
 
 <div class="toolbar">
@@ -320,7 +311,7 @@ not an approved manufacturer document.
 <dialog id="editor">
 <form id="form">
 
-<h2 id="editorTitle">Reference line</h2>
+<h2 id="editorTitle">Edit reference line</h2>
 
 <label>
 Chain model
@@ -358,7 +349,7 @@ Notes
 </label>
 
 <div class="toolbar">
-<button class="action primary" type="submit">
+<button class="action" type="submit">
 Save reference
 </button>
 
@@ -400,41 +391,37 @@ const GM={
  80:G[4]
 };
 
-/*
-Gauge restrictions:
+/* ==========================================
+   GAUGE RESTRICTIONS
 
-1/4 pitch:
-Only .050 is available.
+   1/4:
+   Only .050
 
-.043:
-Only available under 3/8.
+   .043:
+   Only under 3/8
 
-.050:
-Hidden under .404.
+   .050:
+   Hidden under .404
 
-.080:
-Only available under .404.
-*/
+   .080:
+   Only under .404
+========================================== */
 
 function availableGauges(){
  return G.filter(g=>{
 
-  // 1/4 pitch: show only .050
   if(pitch==="1/4″"){
    return g===G[1];
   }
 
-  // .043 only appears under 3/8
   if(g===G[0]&&pitch!=="3/8″"){
    return false;
   }
 
-  // .050 hidden under .404
   if(g===G[1]&&pitch===".404″"){
    return false;
   }
 
-  // .080 only appears under .404
   if(g===G[4]&&pitch!==".404″"){
    return false;
   }
@@ -582,7 +569,7 @@ const BUILTIN=[
    SAVED USER REFERENCE DATA
 ========================================== */
 
-const KEY="chainsaw-user-references-v14";
+const KEY="chainsaw-user-references-v15";
 
 let pitch=".325″";
 let gauge=G[3];
@@ -605,6 +592,7 @@ function esc(s){
 function load(){
  const keys=[
   KEY,
+  "chainsaw-user-references-v14",
   "chainsaw-user-references-v13",
   "chainsaw-user-references-v12",
   "chainsaw-user-references-v11",
@@ -678,10 +666,6 @@ function allEntries(){
 function render(){
  const allowed=availableGauges();
 
- // Hide Add reference line only for .325 pitch.
- $("add").style.display =
-  pitch===".325″"?"none":"inline-block";
-
  if(!allowed.includes(gauge)){
   gauge=allowed[0];
  }
@@ -713,8 +697,7 @@ function render(){
 
  if(!matches.length){
   $("entries").innerHTML=
-   '<div class="empty">No sharpening reference lines for this combination. Use Add reference line to enter a verified chain model.</div>';
-
+   '<div class="empty">No sharpening reference lines for this combination.</div>';
   return;
  }
 
@@ -756,16 +739,20 @@ function render(){
 }
 
 /* ==========================================
-   ADD AND EDIT REFERENCES
+   EDIT AND DELETE REFERENCES
 ========================================== */
 
-function openEditor(id=null){
+function openEditor(id){
  editing=id;
 
- const x=allEntries().find(v=>v.id===id)||{};
+ const x=allEntries().find(v=>v.id===id);
+
+ if(!x){
+  return;
+ }
 
  $("editorTitle").textContent=
-  id?"Edit reference line":"Add reference line";
+  "Edit reference line";
 
  for(const k of [
   "model",
@@ -819,8 +806,6 @@ document.addEventListener("click",e=>{
  }
 });
 
-$("add").onclick=()=>openEditor();
-
 $("cancel").onclick=()=>{
  $("editor").close();
 };
@@ -828,21 +813,17 @@ $("cancel").onclick=()=>{
 $("form").onsubmit=e=>{
  e.preventDefault();
 
- const old=editing
-  ?allEntries().find(x=>x.id===editing)
-  :null;
+ const old=allEntries().find(
+  x=>x.id===editing
+ );
+
+ if(!old){
+  $("editor").close();
+  return;
+ }
 
  const item={
-  ...(old||{}),
-
-  id:editing||(
-   window.crypto&&crypto.randomUUID
-    ?crypto.randomUUID()
-    :"custom-"+Date.now()
-  ),
-
-  pitch:old?old.pitch:pitch,
-  gauge:old?old.gauge:gauge,
+  ...old,
   source:"user"
  };
 
@@ -861,7 +842,9 @@ $("form").onsubmit=e=>{
  custom=custom.filter(x=>x.id!==item.id);
  custom.push(item);
 
- hiddenIds=hiddenIds.filter(id=>id!==item.id);
+ hiddenIds=hiddenIds.filter(
+  id=>id!==item.id
+ );
 
  save();
  $("editor").close();
@@ -875,7 +858,7 @@ $("form").onsubmit=e=>{
 $("export").onclick=()=>{
  const blob=new Blob([
   JSON.stringify({
-   version:14,
+   version:15,
    custom,
    hiddenIds
   },null,2)
@@ -915,7 +898,7 @@ $("file").onchange=async e=>{
   let hidden=[];
 
   if(
-   [5,6,8,10,11,12,13,14].includes(parsed.version)&&
+   [5,6,8,10,11,12,13,14,15].includes(parsed.version)&&
    Array.isArray(parsed.custom)
   ){
    incoming=parsed.custom;
