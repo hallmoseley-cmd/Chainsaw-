@@ -3,564 +3,934 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0e1218">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Chain Ref">
 <title>Chainsaw Sharpening Reference</title>
-
 <style>
-:root {
-  color-scheme: dark;
-  --bg: #0e1218;
-  --card: #1b232e;
-  --border: #354252;
-  --text: #f6f8fc;
-  --muted: #b7c5d5;
-  --yellow: #ffdf39;
+:root{
+ color-scheme:dark;
+ --bg:#0e1218;
+ --card:#1b232e;
+ --border:#354252;
+ --text:#f6f8fc;
+ --muted:#b7c5d5;
+ --yellow:#ffdf39;
 }
-
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font:16px -apple-system,BlinkMacSystemFont,
+ "Segoe UI",Arial,sans-serif;
 }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 16px -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Arial, sans-serif;
+main{
+ max-width:800px;
+ margin:auto;
+ padding:20px 16px 70px;
 }
-
-main {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px 16px 70px;
+h1{font-size:28px;margin:4px 0 8px}
+h2{font-size:17px;margin:0 0 14px}
+h3{font-size:16px;margin:0 0 10px}
+p{line-height:1.5}
+.muted{color:var(--muted);font-size:13px}
+.version{color:var(--yellow);font-size:12px}
+.panel{
+ background:var(--card);
+ border:1px solid var(--border);
+ border-radius:17px;
+ padding:16px;
+ margin-top:15px;
 }
-
-h1 {
-  font-size: 28px;
-  margin: 4px 0 8px;
+.choices{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:10px;
 }
-
-h2 {
-  font-size: 17px;
-  margin: 0 0 14px;
+.choices button{
+ min-height:68px;
+ background:#2a3543;
+ color:white;
+ border:2px solid #455264;
+ border-radius:13px;
+ font-size:23px;
+ font-weight:850;
+ cursor:pointer;
 }
-
-h3 {
-  font-size: 19px;
-  margin: 0 0 10px;
+.gauge{
+ display:flex;
+ flex-wrap:wrap;
+ gap:8px;
 }
-
-p {
-  line-height: 1.5;
+.gauge button{
+ background:#2a3543;
+ color:white;
+ border:1px solid #647387;
+ border-radius:11px;
+ padding:13px;
+ font-weight:800;
+ min-height:48px;
+ cursor:pointer;
 }
-
-.muted {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.version {
-  color: var(--yellow);
-  font-size: 12px;
-}
-
-.panel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  padding: 16px;
-  margin-top: 15px;
-}
-
-.choices {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.choices button {
-  min-height: 68px;
-  background: #2a3543;
-  color: white;
-  border: 2px solid #455264;
-  border-radius: 13px;
-  font-size: 23px;
-  font-weight: 850;
-  cursor: pointer;
-}
-
-.gauge {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.gauge button {
-  background: #2a3543;
-  color: white;
-  border: 1px solid #647387;
-  border-radius: 11px;
-  padding: 13px;
-  font-weight: 800;
-  min-height: 48px;
-  cursor: pointer;
-}
-
 .choices button[aria-pressed="true"],
-.gauge button[aria-pressed="true"] {
-  background: var(--yellow);
-  color: #111;
-  border-color: white;
+.gauge button[aria-pressed="true"]{
+ background:var(--yellow);
+ color:#111;
+ border-color:white;
 }
-
-.selected {
-  background: #3d391e;
-  border-color: #b69e21;
+.selected{
+ background:#3d391e;
+ border-color:#b69e21;
 }
-
-.big {
-  font-size: 29px;
-  font-weight: 900;
-  color: var(--yellow);
-  overflow-wrap: anywhere;
+.big{
+ font-size:29px;
+ font-weight:900;
+ color:var(--yellow);
+ overflow-wrap:anywhere;
 }
-
-.entry {
-  border: 2px solid var(--yellow);
-  border-radius: 13px;
-  padding: 14px;
-  margin-top: 12px;
-  background: #34321f;
+.toolbar{
+ display:flex;
+ flex-wrap:wrap;
+ gap:9px;
+ margin:10px 0;
 }
-
-.spec {
-  display: grid;
-  grid-template-columns: 42% 1fr;
-  border-top: 1px solid #596071;
-  padding: 9px 0;
-  gap: 8px;
+.action{
+ background:#2c394a;
+ border:1px solid #6b7c8f;
+ color:white;
+ border-radius:11px;
+ padding:12px 14px;
+ min-height:46px;
+ font-weight:750;
+ cursor:pointer;
 }
-
-.spec span:first-child {
-  color: #c2ccda;
-  font-size: 13px;
+.primary{
+ background:var(--yellow);
+ border-color:var(--yellow);
+ color:#101318;
 }
-
-.spec strong {
-  overflow-wrap: anywhere;
+.entry{
+ border:2px solid var(--yellow);
+ border-radius:13px;
+ padding:14px;
+ margin-top:12px;
+ background:#34321f;
 }
-
-.empty {
-  border: 1px dashed #66758a;
-  border-radius: 12px;
-  padding: 18px;
-  color: #c9d4e0;
-  margin-top: 10px;
+.entry h3{font-size:19px}
+.spec{
+ display:grid;
+ grid-template-columns:42% 1fr;
+ border-top:1px solid #596071;
+ padding:9px 0;
+ gap:8px;
 }
-
-.footer {
-  font-size: 12px;
-  color: #9aaabc;
-  margin-top: 24px;
-  line-height: 1.6;
+.spec span:first-child{
+ color:#c2ccda;
+ font-size:13px;
 }
-
-button:focus-visible {
-  outline: 3px solid white;
-  outline-offset: 2px;
+.spec strong{overflow-wrap:anywhere}
+.empty{
+ border:1px dashed #66758a;
+ border-radius:12px;
+ padding:18px;
+ color:#c9d4e0;
+ margin-top:10px;
 }
-
-@media (min-width: 600px) {
-  .choices {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+.conversion{
+ background:#202b37;
+ border:1px solid #526173;
+ border-radius:12px;
+ padding:14px;
+ margin-top:12px;
+}
+.conversion h3{
+ color:var(--yellow);
+ font-size:18px;
+}
+.conversion .spec{
+ grid-template-columns:38% 1fr;
+}
+.tag{
+ display:inline-block;
+ background:#34475b;
+ border-radius:6px;
+ padding:4px 7px;
+ font-size:12px;
+ color:#fff;
+ margin-bottom:9px;
+}
+.source-heading{
+ margin-top:26px;
+ padding-top:18px;
+ border-top:2px solid #637285;
+}
+summary{
+ cursor:pointer;
+ font-weight:750;
+ padding:12px 0;
+}
+label{
+ display:block;
+ color:#c9d4e0;
+ font-size:13px;
+ font-weight:750;
+ margin-top:12px;
+}
+input,textarea{
+ display:block;
+ width:100%;
+ font:inherit;
+ background:#111923;
+ color:white;
+ border:1px solid #718198;
+ border-radius:9px;
+ padding:12px;
+ margin-top:5px;
+}
+textarea{min-height:85px}
+dialog{
+ width:min(94vw,560px);
+ border:1px solid #748294;
+ border-radius:17px;
+ background:#1b232e;
+ color:white;
+ padding:18px;
+}
+dialog::backdrop{background:#000b}
+.footer{
+ font-size:12px;
+ color:#9aaabc;
+ margin-top:24px;
+ line-height:1.6;
+}
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible{
+ outline:3px solid white;
+ outline-offset:2px;
+}
+@media(min-width:600px){
+ .choices{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
 </style>
 </head>
 
 <body>
 <main>
-
 <h1>Chainsaw Sharpening</h1>
-
 <p class="version">
-Version 16 — Sharpening Reference
+Version 12 — Complete Woodcutter Supply Conversion Chart
 </p>
-
 <p class="muted">
-Choose chain pitch and gauge to view sharpening
-reference lines from your original chart.
+Choose a chain pitch and gauge to view sharpening
+reference lines and manufacturer chain conversions.
 </p>
 
 <section class="panel">
-  <h2>1. Select chain pitch</h2>
-  <div class="choices" id="pitches"></div>
+<h2>1. Select chain pitch</h2>
+<div class="choices" id="pitches"></div>
 </section>
 
 <section class="panel">
-  <h2>2. Select chain gauge</h2>
-  <div class="gauge" id="gauges"></div>
+<h2>2. Select chain gauge</h2>
+<div class="gauge" id="gauges"></div>
 </section>
 
 <section class="panel selected" aria-live="polite">
-  <div class="muted">CURRENT SELECTION</div>
-  <div class="big" id="current"></div>
-  <p class="muted" id="count"></p>
+<div class="muted">CURRENT SELECTION</div>
+<div class="big" id="current"></div>
+<p class="muted" id="count"></p>
 </section>
 
 <section class="panel">
-  <h2>Matching reference lines</h2>
-  <div id="entries"></div>
+<h2>Matching reference lines</h2>
+<div class="toolbar">
+<button class="action primary" id="add">
++ Add reference line
+</button>
+</div>
+<div id="entries"></div>
+
+<div class="source-heading">
+<h2>Woodcutter Supply — Chain Conversion Reference</h2>
+<p class="muted">
+Source: Woodcutter Supply ©2012,
+"Conversion by specifications."
+</p>
+<p class="muted">
+All conversion rows for the selected pitch are
+shown below. Rows are grouped by pitch, rather
+than filtered by the selected gauge, so you can
+compare different gauges.
+</p>
+<div id="conversionCount" class="muted"></div>
+<div id="conversions"></div>
+</div>
+
+<details>
+<summary>Additional PDF row — 3/4″ Harvester Chain</summary>
+<div id="extraConversion"></div>
+</details>
+</section>
+
+<section class="panel">
+<h2>Manage reference data</h2>
+<p class="muted">
+Your added and edited sharpening reference lines
+are saved in this browser. Export a backup before
+clearing browser data or switching devices.
+</p>
+<div class="toolbar">
+<button class="action" id="export">
+Export backup
+</button>
+<button class="action" id="import">
+Import backup
+</button>
+<input id="file" type="file"
+accept=".json,application/json" hidden>
+</div>
 </section>
 
 <p class="footer">
-Verify all sharpening specifications against the
-original chart and current manufacturer instructions.
-This application is a convenience reference and is
-not an approved manufacturer document.
+Sharpening specifications and chain-conversion
+information are separate references. Verify all
+settings and manufacturer part numbers against
+current manufacturer documentation before use.
+The Woodcutter Supply chart is dated 2012 and
+may not reflect current product designations.
 </p>
-
 </main>
+
+<dialog id="editor">
+<form id="form">
+<h2 id="editorTitle">Reference line</h2>
+<label>
+Chain model
+<input id="model" required maxlength="120">
+</label>
+<label>
+Grinding wheel width
+<input id="wheelWidth">
+</label>
+<label>
+Vise angle
+<input id="viseAngle">
+</label>
+<label>
+Top-plate angle
+<input id="topAngle">
+</label>
+<label>
+Tilt angle
+<input id="sideAngle">
+</label>
+<label>
+Depth gauge
+<input id="depth">
+</label>
+<label>
+Notes
+<textarea id="notes"></textarea>
+</label>
+<div class="toolbar">
+<button class="action primary" type="submit">
+Save reference
+</button>
+<button class="action" type="button" id="cancel">
+Cancel
+</button>
+</div>
+</form>
+</dialog>
 
 <script>
 "use strict";
 
 /* ==========================================
-   CHAIN PITCH OPTIONS
+   PITCH AND GAUGE SELECTIONS
 ========================================== */
 
-const P = [
-  ".325″",
-  "3/8″",
-  ".404″",
-  "1/4″"
+const P=[
+ ".325″",
+ "3/8″",
+ ".404″",
+ "1/4″"
 ];
 
-/* ==========================================
-   CHAIN GAUGE OPTIONS
-========================================== */
-
-const G = [
-  ".043″ / 1.1 mm",
-  ".050″ / 1.3 mm",
-  ".058″ / 1.5 mm",
-  ".063″ / 1.6 mm",
-  ".080″ / 2.0 mm"
+const G=[
+ ".043″ / 1.1 mm",
+ ".050″ / 1.3 mm",
+ ".058″ / 1.5 mm",
+ ".063″ / 1.6 mm",
+ ".080″ / 2.0 mm"
 ];
 
-const GM = {
-  43: G[0],
-  50: G[1],
-  58: G[2],
-  63: G[3],
-  80: G[4]
+const GM={
+ 43:G[0],
+ 50:G[1],
+ 58:G[2],
+ 63:G[3],
+ 80:G[4]
 };
 
-/* ==========================================
-   GAUGE RESTRICTIONS
+function availableGauges(){
+ return G.filter(g=>{
+  // .043 is only shown under 3/8.
+  if(g===G[0]&&pitch!=="3/8″")return false;
 
-   1/4:
-   Only .050
+  // .050 is hidden under .404.
+  if(g===G[1]&&pitch===".404″")return false;
 
-   .043:
-   Only under 3/8
+  // .080 is only shown under .404.
+  if(g===G[4]&&pitch!==".404″")return false;
 
-   .050:
-   Hidden under .404
-
-   .080:
-   Only under .404
-========================================== */
-
-function availableGauges() {
-  return G.filter(g => {
-
-    if (pitch === "1/4″") {
-      return g === G[1];
-    }
-
-    if (g === G[0] && pitch !== "3/8″") {
-      return false;
-    }
-
-    if (g === G[1] && pitch === ".404″") {
-      return false;
-    }
-
-    if (g === G[4] && pitch !== ".404″") {
-      return false;
-    }
-
-    return true;
-  });
+  return true;
+ });
 }
 
 /* ==========================================
    ORIGINAL SHARPENING REFERENCE DATA
-
-   Columns:
-   Model
-   Gauge
-   Vise angle
-   Top-plate angle
-   Tilt angle
-   Windsor
-   Sarp
-   Carlton
-   Stihl
-   EM
-
-   EM is retained internally in the source
-   arrays but is never displayed.
+   Row columns:
+   Model, gauge, vise angle, top angle,
+   tilt angle, Windsor, Sarp, Carlton,
+   Stihl, EM
 ========================================== */
 
-const R325 = [
-  ["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
-  ["21BP",58,"30","55 / 60","10","58J","528","K2C","25RM","S27"],
-  ["22BP",63,"30","55 / 60","10","63J","523","K3C","26RM2","S28"],
-  ["20LP",50,"25","55 / 60","10","50JL","920","K1L","23RS",""],
-  ["21LP",58,"25","55 / 60","10","58JL","928","K2L","25RS","S21"],
-  ["22LP",63,"25","55 / 60","10","63JL","923","K3L","26RS",""],
-  ["33LG",50,"25","55 / 60","10","50JLG","","","23RS",""],
-  ["34LG",58,"25","55 / 60","10","58JLG","","","25RS",""],
-  ["35LG",63,"25","55 / 60","10","63JLG","","","26RS",""],
-  ["95VP",50,"30","60","10","","520P","K1NK","","S30"],
-  ["M21LP",58,"25","60","10","","","","",""],
-  ["M22LP",63,"25","60","10","","","","",""],
-  ["95R",50,"5","50","0","","","","",""]
+const R325=[
+["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
+["21BP",58,"30","55 / 60","10","58J","528","K2C","25RM","S27"],
+["22BP",63,"30","55 / 60","10","63J","523","K3C","26RM2","S28"],
+["20LP",50,"25","55 / 60","10","50JL","920","K1L","23RS",""],
+["21LP",58,"25","55 / 60","10","58JL","928","K2L","25RS","S21"],
+["22LP",63,"25","55 / 60","10","63JL","923","K3L","26RS",""],
+["33LG",50,"25","55 / 60","10","50JLG","","","23RS",""],
+["34LG",58,"25","55 / 60","10","58JLG","","","25RS",""],
+["35LG",63,"25","55 / 60","10","63JLG","","","26RS",""],
+["95VP",50,"30","60","10","","520P","K1NK","","S30"],
+["M21LP",58,"25","60","10","","","","",""],
+["M22LP",63,"25","60","10","","","","",""],
+["95R",50,"5","50","0","","","","",""]
 ];
 
-const R375 = [
-  ["M73LP",58,"25","60","10","","","","",""],
-  ["M75LP",63,"25","60","10","","","","",""],
-  ["72D",50,"35","55 / 60","0","","","","",""],
-  ["72DP",50,"35","55 / 60","0","50AG","","A1EP","33RM","S51"],
-  ["73D",58,"35","55 / 60","0","","","","","S49"],
-  ["73DP",58,"35","55 / 60","0","58AG","","A2EP","","S54"],
-  ["75D",63,"35","55 / 60","0","","","","","S44"],
-  ["75DP",63,"35","55 / 60","0","63AG","","A3EP","36RM",""],
-  ["72LG",50,"25","55 / 60","10","50APL","980D","A1LM","33RS",""],
-  ["73LG",58,"25","55 / 60","10","58APL","988D","A2LM","35RS","S48"],
-  ["75LG",63,"25","55 / 60","10","63APL","983D","A3LM","36RS",""],
-  ["72LP",50,"25","55 / 60","10","50APLG","980","A1LM","33RS1","S46"],
-  ["73LP",58,"25","55 / 60","10","58APLG","988","A2LM","35RS1","S41"],
-  ["75LP",63,"25","55 / 60","10","63APLG","983","A3LM","36RS1","S45"],
-  ["72RD",50,"10–15","50","10","","","A1EP-RP","",""],
-  ["73RD",58,"10–15","50","10","","","A2EP-RP","","S52"],
-  ["75RD",63,"10–15","55 / 60","10","","","A3EP-RP","36RMX","S53"],
-  ["91R",50,"5","60","0","","","","63PMX",""],
-  ["90SG",43,"30","50 / 55","0","43RG","357P","N4C-BL","61PMN",""],
-  ["91VS",50,"30","55 / 60","0","50R","357","N1C","63PM","S36X"],
-  ["91VG",50,"30","60","0","50RG","357S","N1C-BL","63PM1","S36"],
-  ["91P",50,"30","60","0","","","N1C","63PM",""]
+const R375=[
+["M73LP",58,"25","60","10","","","","",""],
+["M75LP",63,"25","60","10","","","","",""],
+["72D",50,"35","55 / 60","0","","","","",""],
+["72DP",50,"35","55 / 60","0","50AG","","A1EP","33RM","S51"],
+["73D",58,"35","55 / 60","0","","","","","S49"],
+["73DP",58,"35","55 / 60","0","58AG","","A2EP","","S54"],
+["75D",63,"35","55 / 60","0","","","","","S44"],
+["75DP",63,"35","55 / 60","0","63AG","","A3EP","36RM",""],
+["72LG",50,"25","55 / 60","10","50APL","980D","A1LM","33RS",""],
+["73LG",58,"25","55 / 60","10","58APL","988D","A2LM","35RS","S48"],
+["75LG",63,"25","55 / 60","10","63APL","983D","A3LM","36RS",""],
+["72LP",50,"25","55 / 60","10","50APLG","980","A1LM","33RS1","S46"],
+["73LP",58,"25","55 / 60","10","58APLG","988","A2LM","35RS1","S41"],
+["75LP",63,"25","55 / 60","10","63APLG","983","A3LM","36RS1","S45"],
+["72RD",50,"10–15","50","10","","","A1EP-RP","",""],
+["73RD",58,"10–15","50","10","","","A2EP-RP","","S52"],
+["75RD",63,"10–15","55 / 60","10","","","A3EP-RP","36RMX","S53"],
+["91R",50,"5","60","0","","","","63PMX",""],
+["90SG",43,"30","50 / 55","0","43RG","357P","N4C-BL","61PMN",""],
+["91VS",50,"30","55 / 60","0","50R","357","N1C","63PM","S36X"],
+["91VG",50,"30","60","0","50RG","357S","N1C-BL","63PM1","S36"],
+["91P",50,"30","60","0","","","N1C","63PM",""]
 ];
 
-const R404 = [
-  ["26",58,"35","60","10","58B","","","",""],
-  ["26P",58,"35","60","10","","858","B2EP","",""],
-  ["27",63,"35","55 / 60","10","63B","","B3RM35","46RM",""],
-  ["27P",63,"35","55 / 60","10","","J63","B3EP","","S64"],
-  ["27R",63,"10–15","50","10","63BR","757","B3RM10","46RCX, 46RMX","S65"],
-  ["27RA",63,"10–15","50","10","","","B3HR","",""],
-  ["59AC",63,"35","55 / 60","10","","463","B3S","46RM","S66"],
-  ["59CP",63,"35","55 / 60","10","63B","","B3S","",""],
-  ["58L",58,"25","55 / 60","10","","","B2LM","",""],
-  ["59L",63,"25","55 / 60","10","63BL","","B3LM","46RS",""],
-  ["16H",63,"35","60","10","HC","757MK","B3H","46RMH",""],
-  ["18H",80,"35","60","10","2HC","MKII2000","B5M","40RMH",""]
+const R404=[
+["26",58,"35","60","10","58B","","","",""],
+["26P",58,"35","60","10","","858","B2EP","",""],
+["27",63,"35","55 / 60","10","63B","","B3RM35","46RM",""],
+["27P",63,"35","55 / 60","10","","J63","B3EP","","S64"],
+["27R",63,"10–15","50","10","63BR","757","B3RM10","46RCX, 46RMX","S65"],
+["27RA",63,"10–15","50","10","","","B3HR","",""],
+["59AC",63,"35","55 / 60","10","","463","B3S","46RM","S66"],
+["59CP",63,"35","55 / 60","10","63B","","B3S","",""],
+["58L",58,"25","55 / 60","10","","","B2LM","",""],
+["59L",63,"25","55 / 60","10","63BL","","B3LM","46RS",""],
+["16H",63,"35","60","10","HC","757MK","B3H","46RMH",""],
+["18H",80,"35","60","10","2HC","MKII2000","B5M","40RMH",""]
 ];
 
-const R250 = [
-  ["25AP",50,"30","55 / 60","10","50K","16","E1MC","13RM","S00"]
+const R250=[
+["25AP",50,"30","55 / 60","10","50K","16","E1MC","13RM","S00"]
 ];
 
-/* ==========================================
-   BUILD REFERENCE ENTRIES
+function makeEntries(rows,pitch,prefix){
+ return rows.map((r,i)=>{
+  const brands={Oregon:r[0]};
 
-   No Notes or EM display fields.
-   No Add, Edit, or Delete controls.
-========================================== */
+  ["Windsor","Sarp","Carlton","Stihl","EM"]
+   .forEach((name,j)=>{
+    if(r[j+5])brands[name]=r[j+5];
+   });
 
-function makeEntries(rows, pitch, prefix) {
-  return rows.map((r, i) => {
-    const brands = {
-      Oregon: r[0]
-    };
+  const is404=pitch===".404″";
+  const isH=is404&&["16H","18H"].includes(r[0]);
 
-    ["Windsor", "Sarp", "Carlton", "Stihl"]
-      .forEach((name, j) => {
-        if (r[j + 5]) {
-          brands[name] = r[j + 5];
-        }
-      });
-
-    const is404 = pitch === ".404″";
-    const isH = is404 &&
-      ["16H", "18H"].includes(r[0]);
-
-    return {
-      id: prefix + "-" +
-        String(i + 1).padStart(2, "0"),
-
-      pitch: pitch,
-      gauge: GM[r[1]],
-      model: r[0],
-      viseAngle: r[2] + "°",
-      topAngle: r[3] + "°",
-      sideAngle: r[4] + "°",
-
-      wheelWidth: is404
-        ? "3/16″ / 4.8 mm"
-        : pitch === ".325″" || pitch === "1/4″"
-          ? "1/8″ / 3.2 mm"
-          : r[0] === "91P"
-            ? ""
-            : "1/8″ / 3.2 mm – 3/16″ / 4.8 mm",
-
-      depth: isH
-        ? ".050″ / 1.27 mm"
-        : is404
-          ? ".030″ / 0.76 mm"
-          : ".025″ / 0.63 mm",
-
-      brands: brands
-    };
-  });
+  return {
+   id:prefix+"-"+String(i+1).padStart(2,"0"),
+   pitch:pitch,
+   gauge:GM[r[1]],
+   model:r[0],
+   viseAngle:r[2]+"°",
+   topAngle:r[3]+"°",
+   sideAngle:r[4]+"°",
+   wheelWidth:is404
+    ?"3/16″ / 4.8 mm"
+    :pitch===".325″"||pitch==="1/4″"
+     ?"1/8″ / 3.2 mm"
+     :r[0]==="91P"
+      ?""
+      :"1/8″ / 3.2 mm – 3/16″ / 4.8 mm",
+   depth:isH
+    ?".050″ / 1.27 mm"
+    :is404
+     ?".030″ / 0.76 mm"
+     :".025″ / 0.63 mm",
+   brands:brands,
+   notes:"Sharpening reference. Verify against original chart.",
+   source:"pdf"
+  };
+ });
 }
 
-const BUILTIN = [
-  ...makeEntries(R325, ".325″", "pdf-325"),
-  ...makeEntries(R375, "3/8″", "pdf-375"),
-  ...makeEntries(R404, ".404″", "pdf-404"),
-  ...makeEntries(R250, "1/4″", "pdf-250")
+const BUILTIN=[
+ ...makeEntries(R325,".325″","pdf-325"),
+ ...makeEntries(R375,"3/8″","pdf-375"),
+ ...makeEntries(R404,".404″","pdf-404"),
+ ...makeEntries(R250,"1/4″","pdf-250")
 ];
 
 /* ==========================================
-   APP STATE
+   COMPLETE WOODCUTTER SUPPLY PDF DATA
+
+   Each row contains:
+   Pitch, gauge, cutter, chain sequence,
+   safety chain, Oregon, Carlton,
+   Husqvarna, Stihl.
+
+   The PDF's 3/8 Lo Pro rows are preserved
+   with their original pitch designation.
 ========================================== */
 
-let pitch = ".325″";
-let gauge = G[3];
+const CONVERSIONS=[
 
-const $ = id => document.getElementById(id);
+/* 1/4 INCH */
+["1/4″",".050","Semi Chisel","Standard","Yes","25AP","E1MC","H100","13RM1"],
 
-function esc(s) {
-  return String(s ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[c]));
-}
+/* 3/8 LOW PROFILE */
+["3/8 Lo Pro",".043","Semi Chisel","Standard","Yes","90SG","N4C-BL","","61PMN1"],
+["3/8 Lo Pro",".050","Semi Chisel","Standard","Yes","91VG","N1C-BL","H36/43X","63PM1"],
+["3/8 Lo Pro",".050","Semi Chisel","Standard","No","91VX","N1C","H35","63PM"],
+
+/* .325 INCH */
+[".325″",".050","Chisel","Standard","Yes","20BPX","K1L-BL","H22/S22","23RM"],
+[".325″",".050","Chisel","Standard","No","20LPX","K1L","H23/S23","23RS"],
+[".325″",".058","Chisel","Standard","Yes","21BPX","K2L-BL","H25/S25","25RMC"],
+[".325″",".058","Chisel","Standard","No","21LPX","K2L","H21/S21","25RS"],
+[".325″",".063","Chisel","Standard","Yes","22BPX","K3L-BL","H26/S26","26RMC"],
+[".325″",".063","Chisel","Standard","No","22LPX","K3L","H26",""],
+
+/* 3/8 INCH */
+["3/8″",".050","Chisel","Standard","No","72LGX","A1LM","H47","33RS1"],
+["3/8″",".050","Chisel","Standard","No","72LPX","A1LM-GL","H46",""],
+["3/8″",".050","Chisel","Standard","Yes","72V","A1LM-GL","H80","33RM2"],
+["3/8″",".058","Chisel","Standard","No","73LGX","A2LM","H48","35RS"],
+["3/8″",".058","Chisel","Standard","No","73LPX","A2LM-GL","H41/H42","35RS"],
+["3/8″",".058","Chisel","Standard","Yes","73V","A2LM-GL","H81",""],
+["3/8″",".063","Chisel","Standard","No","75LGX","A3LM","H45","36RS"],
+["3/8″",".063","Chisel","Standard","No","75LPX","A3LM-GL","",""],
+["3/8″",".063","Chisel","Standard","Yes","75V","A3LM-GL","","36RSC3"],
+["3/8″",".050","Chisel","Skip Tooth","No","72JGX","A1LM-SK","","33RSF"],
+["3/8″",".058","Chisel","Skip Tooth","No","73JGX","A2LM-SK","",""],
+["3/8″",".063","Chisel","Skip Tooth","No","75JGX","A3LM-SK","",""],
+
+/* .404 INCH */
+[".404″",".063","Chisel","Standard","No","68LX","B3LM","H57/S57","46RS"],
+[".404″",".063","Harvester","Standard","No","16H","B3M","","46RMH"],
+[".404″",".080","Harvester","Standard","No","18HX","B5M","","40RMHS"],
+
+/* 3/4 INCH */
+["3/4″",".122","Harvester","Standard","No","11BC","G7S","",""]
+
+];
 
 /* ==========================================
-   DISPLAY REFERENCES
+   APP STORAGE
 ========================================== */
 
-function render() {
-  const allowed = availableGauges();
+const KEY="chainsaw-user-references-v12";
 
-  if (!allowed.includes(gauge)) {
-    gauge = allowed[0];
+let pitch=".325″";
+let gauge=G[3];
+let editing=null;
+let custom=[];
+let hiddenIds=[];
+
+const $=id=>document.getElementById(id);
+
+function esc(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[c]));
+}
+
+function load(){
+ const keys=[
+  KEY,
+  "chainsaw-user-references-v11",
+  "chainsaw-user-references-v10",
+  "chainsaw-user-references-v8",
+  "chainsaw-user-references-v6",
+  "chainsaw-user-references-v5"
+ ];
+
+ for(const key of keys){
+  try{
+   const raw=localStorage.getItem(key);
+   if(!raw)continue;
+
+   const saved=JSON.parse(raw);
+   if(!saved||!Array.isArray(saved.custom))continue;
+
+   custom=saved.custom.filter(x=>
+    x&&typeof x.id==="string"&&
+    typeof x.model==="string"&&
+    P.includes(x.pitch)&&G.includes(x.gauge)
+   );
+
+   hiddenIds=Array.isArray(saved.hiddenIds)
+    ?saved.hiddenIds:[];
+
+   break;
+  }catch(e){
+   console.warn("Unable to load data",e);
   }
+ }
+}
 
-  $("pitches").innerHTML = P.map(p => `
-    <button
-      type="button"
-      data-pitch="${esc(p)}"
-      aria-pressed="${p === pitch}">
-      ${esc(p)}
-    </button>
-  `).join("");
-
-  $("gauges").innerHTML = allowed.map(g => `
-    <button
-      type="button"
-      data-gauge="${esc(g)}"
-      aria-pressed="${g === gauge}">
-      ${esc(g)}
-    </button>
-  `).join("");
-
-  $("current").textContent =
-    pitch + " / " + gauge;
-
-  const matches = BUILTIN.filter(x =>
-    x.pitch === pitch &&
-    x.gauge === gauge
+function save(){
+ try{
+  localStorage.setItem(
+   KEY,
+   JSON.stringify({custom,hiddenIds})
   );
+ }catch(e){
+  alert("Unable to save changes in this browser.");
+ }
+}
 
-  $("count").textContent =
-    matches.length + " matching reference lines";
+function allEntries(){
+ const replacements=new Map(
+  custom.map(x=>[x.id,x])
+ );
 
-  if (!matches.length) {
-    $("entries").innerHTML = `
-      <div class="empty">
-        No sharpening reference lines for
-        this combination.
-      </div>
-    `;
-    return;
-  }
+ const builtins=BUILTIN
+  .filter(x=>!hiddenIds.includes(x.id))
+  .map(x=>replacements.get(x.id)||x);
 
-  $("entries").innerHTML = matches.map(x => {
-    const fields = [
-      ["Gauge", x.gauge],
-      ["Vise angle", x.viseAngle],
-      ["Top-plate angle", x.topAngle],
-      ["Tilt angle", x.sideAngle],
-      ["Depth gauge", x.depth],
-      ["Wheel width", x.wheelWidth],
-      ...Object.entries(x.brands || {})
-    ].filter(([name, value]) => value);
+ const extras=custom.filter(x=>
+  !BUILTIN.some(b=>b.id===x.id)
+ );
 
-    return `
-      <article class="entry">
-        <h3>${esc(x.model)}</h3>
-
-        ${fields.map(([name, value]) => `
-          <div class="spec">
-            <span>${esc(name)}</span>
-            <strong>${esc(value)}</strong>
-          </div>
-        `).join("")}
-      </article>
-    `;
-  }).join("");
+ return [...builtins,...extras];
 }
 
 /* ==========================================
-   PITCH AND GAUGE BUTTONS
+   CONVERSION CARD DISPLAY
 ========================================== */
 
-document.addEventListener("click", e => {
-  const pitchButton =
-    e.target.closest("[data-pitch]");
+function conversionCard(r){
+ const fields=[
+  ["Chain pitch",r[0]],
+  ["Chain gauge",r[1]+"″"],
+  ["Cutter",r[2]],
+  ["Chain sequence",r[3]],
+  ["Safety chain",r[4]],
+  ["Oregon part #",r[5]],
+  ["Carlton part #",r[6]],
+  ["Husqvarna part #",r[7]],
+  ["Stihl part #",r[8]]
+ ];
 
-  const gaugeButton =
-    e.target.closest("[data-gauge]");
+ return `<article class="conversion">
+  <h3>${esc(r[5])}</h3>
+  <span class="tag">${esc(r[0])}</span>
+  ${fields.map(([label,value])=>
+   `<div class="spec">
+    <span>${esc(label)}</span>
+    <strong>${esc(value||"Not listed")}</strong>
+   </div>`
+  ).join("")}
+ </article>`;
+}
 
-  if (pitchButton) {
-    pitch = pitchButton.dataset.pitch;
-    render();
+/* ==========================================
+   MAIN RENDER
+========================================== */
+
+function render(){
+ const allowed=availableGauges();
+
+ if(!allowed.includes(gauge)){
+  gauge=allowed[0];
+ }
+
+ $("pitches").innerHTML=P.map(p=>
+  `<button type="button"
+    data-pitch="${esc(p)}"
+    aria-pressed="${p===pitch}">
+    ${esc(p)}
+  </button>`
+ ).join("");
+
+ $("gauges").innerHTML=allowed.map(g=>
+  `<button type="button"
+    data-gauge="${esc(g)}"
+    aria-pressed="${g===gauge}">
+    ${esc(g)}
+  </button>`
+ ).join("");
+
+ $("current").textContent=pitch+" / "+gauge;
+
+ const matches=allEntries().filter(x=>
+  x.pitch===pitch&&x.gauge===gauge
+ );
+
+ $("count").textContent=
+  matches.length+" matching sharpening reference lines";
+
+ $("entries").innerHTML=matches.length
+  ?matches.map(x=>{
+   const fields=[
+    ["Gauge",x.gauge],
+    ["Vise angle",x.viseAngle],
+    ["Top-plate angle",x.topAngle],
+    ["Tilt angle",x.sideAngle],
+    ["Depth gauge",x.depth],
+    ["Wheel width",x.wheelWidth],
+    ...Object.entries(x.brands||{}),
+    ["Notes",x.notes]
+   ].filter(([k,v])=>v);
+
+   return `<article class="entry">
+    <h3>${esc(x.model)}</h3>
+    ${fields.map(([k,v])=>
+     `<div class="spec">
+      <span>${esc(k)}</span>
+      <strong>${esc(v)}</strong>
+     </div>`
+    ).join("")}
+    <div class="toolbar">
+     <button class="action"
+      data-edit="${esc(x.id)}">Edit</button>
+     <button class="action"
+      data-delete="${esc(x.id)}">Delete</button>
+    </div>
+   </article>`;
+  }).join("")
+  :'<div class="empty">No sharpening reference lines for this combination.</div>';
+
+ // Include low-profile entries under 3/8,
+ // but preserve their distinct PDF pitch label.
+ const conversions=CONVERSIONS.filter(r=>
+  r[0]===pitch||
+  (pitch==="3/8″"&&r[0]==="3/8 Lo Pro")
+ );
+
+ $("conversionCount").textContent=
+  conversions.length+" conversion chart entries for "+pitch;
+
+ $("conversions").innerHTML=conversions.length
+  ?conversions.map(conversionCard).join("")
+  :'<div class="empty">No conversion entries.</div>';
+
+ $("extraConversion").innerHTML=
+  CONVERSIONS.filter(r=>r[0]==="3/4″")
+   .map(conversionCard).join("");
+}
+
+/* ==========================================
+   EDITING
+========================================== */
+
+function openEditor(id=null){
+ editing=id;
+
+ const x=allEntries().find(v=>v.id===id)||{};
+
+ $("editorTitle").textContent=
+  id?"Edit reference line":"Add reference line";
+
+ for(const k of [
+  "model","wheelWidth","viseAngle",
+  "topAngle","sideAngle","depth","notes"
+ ]){
+  $(k).value=x[k]||"";
+ }
+
+ $("editor").showModal();
+}
+
+document.addEventListener("click",e=>{
+ const p=e.target.closest("[data-pitch]");
+ const g=e.target.closest("[data-gauge]");
+ const ed=e.target.closest("[data-edit]");
+ const del=e.target.closest("[data-delete]");
+
+ if(p){
+  pitch=p.dataset.pitch;
+  render();
+ }
+
+ if(g){
+  gauge=g.dataset.gauge;
+  render();
+ }
+
+ if(ed){
+  openEditor(ed.dataset.edit);
+ }
+
+ if(del&&confirm("Delete this reference line?")){
+  const id=del.dataset.delete;
+
+  custom=custom.filter(x=>x.id!==id);
+
+  if(
+   BUILTIN.some(x=>x.id===id)&&
+   !hiddenIds.includes(id)
+  ){
+   hiddenIds.push(id);
   }
 
-  if (gaugeButton) {
-    gauge = gaugeButton.dataset.gauge;
-    render();
-  }
+  save();
+  render();
+ }
 });
 
+$("add").onclick=()=>openEditor();
+$("cancel").onclick=()=>$("editor").close();
+
+$("form").onsubmit=e=>{
+ e.preventDefault();
+
+ const old=editing
+  ?allEntries().find(x=>x.id===editing)
+  :null;
+
+ const item={
+  ...(old||{}),
+  id:editing||(
+   window.crypto&&crypto.randomUUID
+    ?crypto.randomUUID()
+    :"custom-"+Date.now()
+  ),
+  pitch:old?old.pitch:pitch,
+  gauge:old?old.gauge:gauge,
+  source:"user"
+ };
+
+ for(const k of [
+  "model","wheelWidth","viseAngle",
+  "topAngle","sideAngle","depth","notes"
+ ]){
+  item[k]=$(k).value.trim();
+ }
+
+ custom=custom.filter(x=>x.id!==item.id);
+ custom.push(item);
+
+ hiddenIds=hiddenIds.filter(id=>id!==item.id);
+
+ save();
+ $("editor").close();
+ render();
+};
+
 /* ==========================================
-   START APP
+   EXPORT / IMPORT
 ========================================== */
 
-render();
+$("export").onclick=()=>{
+ const blob=new Blob([
+  JSON.stringify({
+   version:12,
+   custom,
+   hiddenIds
+  },null,2)
+ ],{type:"application/json"});
 
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+
+ a.href=url;
+ a.download="chainsaw-reference-backup.json";
+ a.click();
+
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+};
+
+$("import").onclick=()=>$("file").click();
+
+$("file").onchange=async e=>{
+ const f=e.target.files[0];
+ if(!f)return;
+
+ try{
+  const parsed=JSON.parse(await f.text());
+  let incoming;
+  let hidden=[];
+
+  if(
+   [5,6,8,10,11,12].includes(parsed.version)&&
+   Array.isArray(parsed.custom)
+  ){
+   incoming=parsed.custom;
+   hidden=Array.isArray(parsed.hiddenIds)
+    ?parsed.hiddenIds:[];
+  }else if(
+   parsed.version===1&&
+   Array.isArray(parsed.entries)
+  ){
+   incoming=parsed.entries.filter(
+    x=>x.source!=="pdf"
+   );
+  }else{
+   throw Error("Invalid backup format");
+  }
+
+  if(!incoming.every(x=>
+   x&&typeof x.id==="string"&&
+   typeof x.model==="string"&&
+   P.includes(x.pitch)&&G.includes(x.gauge)
+  )){
+   throw Error("Invalid reference entries");
+  }
+
+  if(confirm("Replace saved edits with this backup?")){
+   custom=incoming;
+   hiddenIds=hidden;
+   save();
+   render();
+  }
+ }catch(err){
+  alert("Unable to import this backup.");
+ }
+
+ e.target.value="";
+};
+
+load();
+render();
 </script>
 </body>
 </html>
