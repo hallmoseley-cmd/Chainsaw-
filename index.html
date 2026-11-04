@@ -3,10 +3,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10151c">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Chain Ref">
 <title>Chainsaw Sharpening Reference</title>
 <style>
 :root{
@@ -16,12 +15,12 @@
  --line:#354252;
  --text:#f6f8fc;
  --muted:#b7c5d5;
- --yellow:#ffdf39;
+ --yellow:#ffdf39
 }
 *{box-sizing:border-box}
 body{
  margin:0;background:var(--bg);color:var(--text);
- font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
 }
 main{max-width:760px;margin:auto;padding:20px 16px 70px}
 h1{font-size:27px;margin:5px 0}
@@ -33,128 +32,81 @@ p{line-height:1.5}
 }
 .muted{color:var(--muted);font-size:13px}
 .panel{
- background:var(--card);
- border:1px solid var(--line);
- border-radius:17px;
- padding:16px;margin-top:15px
+ background:var(--card);border:1px solid var(--line);
+ border-radius:17px;padding:16px;margin-top:15px
 }
 .choices{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:10px
+ display:grid;grid-template-columns:repeat(2,1fr);gap:10px
 }
 .choices button{
- min-height:70px;
- background:#2a3543;
- color:white;
- border:2px solid #455264;
- border-radius:13px;
- font-size:23px;
- font-weight:850;
- cursor:pointer
+ min-height:70px;background:#2a3543;color:white;
+ border:2px solid #455264;border-radius:13px;
+ font-size:23px;font-weight:850;cursor:pointer
 }
 .choices button[aria-pressed=true],
 .gauge button[aria-pressed=true]{
- background:var(--yellow);
- color:#111;
- border-color:#fff
+ background:var(--yellow);color:#111;border-color:#fff
 }
 .gauge{display:flex;flex-wrap:wrap;gap:8px}
 .gauge button{
- border:1px solid #647387;
- border-radius:11px;
- padding:13px;
- background:#2a3543;
- color:white;
- font-weight:800;
- min-height:48px;
- cursor:pointer
+ border:1px solid #647387;border-radius:11px;
+ padding:13px;background:#2a3543;color:white;
+ font-weight:800;min-height:48px;cursor:pointer
 }
 .selected{background:#3d391e;border-color:#b69e21}
 .selected .big{
- font-size:29px;
- font-weight:900;
- color:var(--yellow)
+ font-size:29px;font-weight:900;color:var(--yellow)
 }
 .toolbar{display:flex;gap:9px;flex-wrap:wrap}
 .action{
- background:#2c394a;
- border:1px solid #6b7c8f;
- color:white;
- border-radius:11px;
- padding:12px 14px;
- min-height:46px;
- font-weight:750;
- cursor:pointer
+ background:#2c394a;border:1px solid #6b7c8f;
+ color:white;border-radius:11px;padding:12px 14px;
+ min-height:46px;font-weight:750;cursor:pointer
 }
 .action.primary{
- background:var(--yellow);
- border-color:var(--yellow);
+ background:var(--yellow);border-color:var(--yellow);
  color:#101318
 }
 .entry{
- border:2px solid var(--yellow);
- border-radius:13px;
- padding:14px;
- margin-top:10px;
- background:#34321f
+ border:2px solid var(--yellow);border-radius:13px;
+ padding:14px;margin-top:10px;background:#34321f
 }
 .entry h3{font-size:19px;margin:0 0 9px}
 .spec{
- display:grid;
- grid-template-columns:42% 1fr;
- border-top:1px solid #596071;
- padding:9px 0;
- gap:8px
+ display:grid;grid-template-columns:42% 1fr;
+ border-top:1px solid #596071;padding:9px 0;gap:8px
 }
 .spec span:first-child{color:#c2ccda;font-size:13px}
 .spec strong{overflow-wrap:anywhere}
 .entry .toolbar{margin-top:10px}
 label{
- display:block;
- color:#c9d4e0;
- font-size:13px;
- font-weight:750;
- margin-top:12px
+ display:block;color:#c9d4e0;font-size:13px;
+ font-weight:750;margin-top:12px
 }
 input,textarea{
- display:block;
- width:100%;
- font:inherit;
- background:#111923;
- color:white;
- border:1px solid #718198;
- border-radius:9px;
- padding:12px;
- margin-top:5px
+ display:block;width:100%;font:inherit;
+ background:#111923;color:white;
+ border:1px solid #718198;border-radius:9px;
+ padding:12px;margin-top:5px
 }
 textarea{min-height:85px}
 dialog{
- width:min(94vw,560px);
- border:1px solid #748294;
- border-radius:17px;
- background:#1b232e;
- color:white;
- padding:18px
+ width:min(94vw,560px);border:1px solid #748294;
+ border-radius:17px;background:#1b232e;
+ color:white;padding:18px
 }
 dialog::backdrop{background:#000b}
 .empty{
- border:1px dashed #66758a;
- border-radius:12px;
- padding:18px;
- color:#c9d4e0
+ border:1px dashed #66758a;border-radius:12px;
+ padding:18px;color:#c9d4e0
 }
 .footer{
- font-size:12px;
- color:#9aaabc;
- margin-top:23px;
- line-height:1.6
+ font-size:12px;color:#9aaabc;
+ margin-top:23px;line-height:1.6
 }
-button:focus-visible,
-input:focus-visible,
+button:focus-visible,input:focus-visible,
 textarea:focus-visible{
- outline:3px solid white;
- outline-offset:2px
+ outline:3px solid white;outline-offset:2px
 }
 @media(min-width:600px){
  .choices{grid-template-columns:repeat(4,1fr)}
@@ -165,7 +117,7 @@ textarea:focus-visible{
 <main>
 <div class="eyebrow">FIELD QUICK REFERENCE</div>
 <h1>Chainsaw Sharpening</h1>
-<p class="muted">Reference update: .404″ gauge selection • v9</p>
+<p class="muted">Reference update: 1/4″ chart entries • v10</p>
 <p class="muted">
 Choose chain pitch and gauge to view sharpening
 reference lines from your chart.
@@ -200,23 +152,23 @@ reference lines from your chart.
 <section class="panel">
 <h2>Manage reference data</h2>
 <p class="muted">
-Built-in PDF reference lines are included in this app.
-Your edits are stored on this device. Export a backup
-before clearing browser data or changing devices.
+Built-in reference lines are included in this app.
+Your edits are stored in this browser. Export a
+backup before clearing browser data or switching devices.
 </p>
 <div class="toolbar">
 <button class="action" id="export">Export backup</button>
 <button class="action" id="import">Import backup</button>
-<input id="file" type="file" accept=".json,application/json" hidden>
+<input id="file" type="file"
+ accept=".json,application/json" hidden>
 </div>
 </section>
 
 <p class="footer">
-Verify all specifications against current manufacturer
-instructions and the original chart. Pitch and gauge
-alone do not uniquely determine sharpening specifications.
-This app is a convenience reference, not an approved
-manufacturer document.
+Verify all specifications against the original PDF
+and current manufacturer instructions. This app is
+a convenience reference, not an approved manufacturer
+document.
 </p>
 </main>
 
@@ -245,8 +197,12 @@ manufacturer document.
 <textarea id="notes"></textarea>
 </label>
 <div class="toolbar" style="margin-top:18px">
-<button type="submit" class="action primary">Save reference</button>
-<button type="button" class="action" id="cancel">Cancel</button>
+<button type="submit" class="action primary">
+Save reference
+</button>
+<button type="button" class="action" id="cancel">
+Cancel
+</button>
 </div>
 </form>
 </dialog>
@@ -265,17 +221,14 @@ const G=[
 ];
 
 const GAUGE_MAP={
- 43:G[0],
- 50:G[1],
- 58:G[2],
- 63:G[3],
- 80:G[4]
+ 43:G[0],50:G[1],58:G[2],63:G[3],80:G[4]
 };
 
 /*
-Row columns:
-Model, gauge code, vise angle, top-plate angle,
-tilt angle, Windsor, Sarp, Carlton, Stihl, EM.
+Data columns:
+Oregon model, gauge, vise angle,
+top-plate angle, tilt angle,
+Windsor, Sarp, Carlton, Stihl, EM.
 */
 
 const ROWS_325=[
@@ -334,6 +287,15 @@ const ROWS_404=[
 ["18H",80,"35","60","10","2HC","MKII2000","B5M","40RMH",""]
 ];
 
+/*
+1/4-inch section from the original PDF.
+The PDF has one row under this pitch:
+25AP, .050 gauge.
+*/
+const ROWS_250=[
+["25AP",50,"30","55 / 60","10","50K","16","E1MC","13RM","S00"]
+];
+
 function makeEntries(rows,pitch,prefix){
  return rows.map((r,i)=>{
   const brands={Oregon:r[0]};
@@ -346,10 +308,11 @@ function makeEntries(rows,pitch,prefix){
 
   const is404=pitch===".404″";
   const isH=is404&&["16H","18H"].includes(r[0]);
+  const isQuarter=pitch==="1/4″";
 
   return {
    id:prefix+"-"+String(i+1).padStart(2,"0"),
-   pitch:pitch,
+   pitch,
    gauge:GAUGE_MAP[r[1]],
    model:r[0],
    viseAngle:r[2]+"°",
@@ -357,7 +320,7 @@ function makeEntries(rows,pitch,prefix){
    sideAngle:r[4]+"°",
    wheelWidth:is404
     ?"3/16″ / 4.8 mm"
-    :pitch===".325″"
+    :isQuarter||pitch===".325″"
      ?"1/8″ / 3.2 mm"
      :r[0]==="91P"
       ?""
@@ -367,7 +330,7 @@ function makeEntries(rows,pitch,prefix){
     :is404
      ?".030″ / 0.76 mm"
      :".025″ / 0.63 mm",
-   brands:brands,
+   brands,
    notes:"Source: Chainsaw Sharpening.pdf — DIMENSIONS table. Verify against current manufacturer instructions.",
    source:"pdf"
   };
@@ -377,10 +340,11 @@ function makeEntries(rows,pitch,prefix){
 const BUILTIN=[
  ...makeEntries(ROWS_325,".325″","pdf-325"),
  ...makeEntries(ROWS_375,"3/8″","pdf-375"),
- ...makeEntries(ROWS_404,".404″","pdf-404")
+ ...makeEntries(ROWS_404,".404″","pdf-404"),
+ ...makeEntries(ROWS_250,"1/4″","pdf-250")
 ];
 
-const KEY="chainsaw-user-references-v8";
+const KEY="chainsaw-user-references-v10";
 
 let pitch=".325″";
 let gauge=G[3];
@@ -400,51 +364,50 @@ function escapeHTML(s){
  }[c]));
 }
 
-/*
-Version 9 gauge visibility:
-.043 only under 3/8.
-.050 hidden under .404.
-.080 only under .404.
-*/
 function availableGauges(){
  return G.filter(g=>{
+  // .043 only appears under 3/8.
   if(g===G[0]&&pitch!=="3/8″")return false;
+
+  // .050 is hidden under .404.
   if(g===G[1]&&pitch===".404″")return false;
+
+  // .080 only appears under .404.
   if(g===G[4]&&pitch!==".404″")return false;
+
   return true;
  });
 }
 
 function load(){
- try{
-  const keys=[
-   KEY,
-   "chainsaw-user-references-v6",
-   "chainsaw-user-references-v5"
-  ];
+ const keys=[
+  KEY,
+  "chainsaw-user-references-v8",
+  "chainsaw-user-references-v6",
+  "chainsaw-user-references-v5"
+ ];
 
-  let saved=null;
-  for(const key of keys){
+ for(const key of keys){
+  try{
    const raw=localStorage.getItem(key);
-   if(raw){
-    saved=JSON.parse(raw);
-    break;
-   }
-  }
+   if(!raw)continue;
 
-  if(saved&&Array.isArray(saved.custom)){
+   const saved=JSON.parse(raw);
+   if(!saved||!Array.isArray(saved.custom))continue;
+
    custom=saved.custom.filter(x=>
     x&&typeof x.id==="string"&&
     typeof x.model==="string"&&
     P.includes(x.pitch)&&G.includes(x.gauge)
    );
-  }
 
-  if(saved&&Array.isArray(saved.hiddenIds)){
-   hiddenIds=saved.hiddenIds;
+   hiddenIds=Array.isArray(saved.hiddenIds)
+    ?saved.hiddenIds:[];
+
+   break;
+  }catch(e){
+   console.warn("Could not load saved data",e);
   }
- }catch(e){
-  console.warn("Saved reference data unavailable",e);
  }
 }
 
@@ -484,17 +447,17 @@ function render(){
 
  $("pitches").innerHTML=P.map(p=>
   `<button type="button"
-    data-pitch="${escapeHTML(p)}"
-    aria-pressed="${p===pitch}">
-    ${escapeHTML(p)}
+   data-pitch="${escapeHTML(p)}"
+   aria-pressed="${p===pitch}">
+   ${escapeHTML(p)}
   </button>`
  ).join("");
 
  $("gauges").innerHTML=allowed.map(g=>
   `<button type="button"
-    data-gauge="${escapeHTML(g)}"
-    aria-pressed="${g===gauge}">
-    ${escapeHTML(g)}
+   data-gauge="${escapeHTML(g)}"
+   aria-pressed="${g===gauge}">
+   ${escapeHTML(g)}
   </button>`
  ).join("");
 
@@ -521,7 +484,6 @@ function render(){
    ["Tilt angle",x.sideAngle],
    ["Depth gauge",x.depth],
    ["Wheel width",x.wheelWidth],
-   ["File diameter",x.fileDiameter],
    ...Object.entries(x.brands||{}),
    ["Notes",x.notes]
   ].filter(([k,v])=>v);
@@ -639,7 +601,7 @@ $("form").onsubmit=e=>{
 $("export").onclick=()=>{
  const blob=new Blob([
   JSON.stringify({
-   version:8,
+   version:10,
    custom,
    hiddenIds
   },null,2)
@@ -667,7 +629,7 @@ $("file").onchange=async e=>{
   let hidden=[];
 
   if(
-   [5,6,8].includes(parsed.version)&&
+   [5,6,8,10].includes(parsed.version)&&
    Array.isArray(parsed.custom)
   ){
    incoming=parsed.custom;
