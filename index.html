@@ -246,7 +246,7 @@ textarea:focus-visible{
 <h1>Chainsaw Sharpening</h1>
 
 <p class="version">
-Version 13 — Sharpening Reference
+Version 14 — Sharpening Reference
 </p>
 
 <p class="muted">
@@ -401,23 +401,40 @@ const GM={
 };
 
 /*
-Existing gauge restrictions:
+Gauge restrictions:
 
-.043 appears only under 3/8.
-.050 is hidden under .404.
-.080 appears only under .404.
+1/4 pitch:
+Only .050 is available.
+
+.043:
+Only available under 3/8.
+
+.050:
+Hidden under .404.
+
+.080:
+Only available under .404.
 */
 
 function availableGauges(){
  return G.filter(g=>{
+
+  // 1/4 pitch: show only .050
+  if(pitch==="1/4″"){
+   return g===G[1];
+  }
+
+  // .043 only appears under 3/8
   if(g===G[0]&&pitch!=="3/8″"){
    return false;
   }
 
+  // .050 hidden under .404
   if(g===G[1]&&pitch===".404″"){
    return false;
   }
 
+  // .080 only appears under .404
   if(g===G[4]&&pitch!==".404″"){
    return false;
   }
@@ -565,7 +582,7 @@ const BUILTIN=[
    SAVED USER REFERENCE DATA
 ========================================== */
 
-const KEY="chainsaw-user-references-v13";
+const KEY="chainsaw-user-references-v14";
 
 let pitch=".325″";
 let gauge=G[3];
@@ -588,6 +605,7 @@ function esc(s){
 function load(){
  const keys=[
   KEY,
+  "chainsaw-user-references-v13",
   "chainsaw-user-references-v12",
   "chainsaw-user-references-v11",
   "chainsaw-user-references-v10",
@@ -659,6 +677,10 @@ function allEntries(){
 
 function render(){
  const allowed=availableGauges();
+
+ // Hide Add reference line only for .325 pitch.
+ $("add").style.display =
+  pitch===".325″"?"none":"inline-block";
 
  if(!allowed.includes(gauge)){
   gauge=allowed[0];
@@ -853,7 +875,7 @@ $("form").onsubmit=e=>{
 $("export").onclick=()=>{
  const blob=new Blob([
   JSON.stringify({
-   version:13,
+   version:14,
    custom,
    hiddenIds
   },null,2)
@@ -893,7 +915,7 @@ $("file").onchange=async e=>{
   let hidden=[];
 
   if(
-   [5,6,8,10,11,12,13].includes(parsed.version)&&
+   [5,6,8,10,11,12,13,14].includes(parsed.version)&&
    Array.isArray(parsed.custom)
   ){
    incoming=parsed.custom;
