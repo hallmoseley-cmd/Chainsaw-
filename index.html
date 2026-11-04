@@ -3,49 +3,36 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#10151c">
-<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Chainsaw Sharpening Reference</title>
 <style>
 :root{
  color-scheme:dark;
- --bg:#0e1218;
- --card:#1b232e;
- --line:#354252;
- --text:#f6f8fc;
- --muted:#b7c5d5;
+ --bg:#0e1218;--card:#1b232e;
+ --line:#354252;--muted:#b7c5d5;
  --yellow:#ffdf39
 }
 *{box-sizing:border-box}
 body{
- margin:0;background:var(--bg);color:var(--text);
- font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+ margin:0;background:var(--bg);color:white;
+ font:16px -apple-system,BlinkMacSystemFont,
+ "Segoe UI",sans-serif
 }
 main{max-width:760px;margin:auto;padding:20px 16px 70px}
 h1{font-size:27px;margin:5px 0}
 h2{font-size:16px;margin:0 0 13px}
-p{line-height:1.5}
-.eyebrow{
- color:var(--yellow);font-size:11px;
- font-weight:850;letter-spacing:2px
-}
-.muted{color:var(--muted);font-size:13px}
+h3{margin:0 0 10px}
+.muted{color:var(--muted);font-size:13px;line-height:1.5}
 .panel{
  background:var(--card);border:1px solid var(--line);
  border-radius:17px;padding:16px;margin-top:15px
 }
-.choices{
- display:grid;grid-template-columns:repeat(2,1fr);gap:10px
-}
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .choices button{
  min-height:70px;background:#2a3543;color:white;
  border:2px solid #455264;border-radius:13px;
  font-size:23px;font-weight:850;cursor:pointer
-}
-.choices button[aria-pressed=true],
-.gauge button[aria-pressed=true]{
- background:var(--yellow);color:#111;border-color:#fff
 }
 .gauge{display:flex;flex-wrap:wrap;gap:8px}
 .gauge button{
@@ -53,17 +40,19 @@ p{line-height:1.5}
  padding:13px;background:#2a3543;color:white;
  font-weight:800;min-height:48px;cursor:pointer
 }
-.selected{background:#3d391e;border-color:#b69e21}
-.selected .big{
- font-size:29px;font-weight:900;color:var(--yellow)
+.choices button[aria-pressed=true],
+.gauge button[aria-pressed=true]{
+ background:var(--yellow);color:#111;border-color:white
 }
-.toolbar{display:flex;gap:9px;flex-wrap:wrap}
+.selected{background:#3d391e;border-color:#b69e21}
+.big{font-size:29px;font-weight:900;color:var(--yellow)}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}
 .action{
  background:#2c394a;border:1px solid #6b7c8f;
  color:white;border-radius:11px;padding:12px 14px;
  min-height:46px;font-weight:750;cursor:pointer
 }
-.action.primary{
+.primary{
  background:var(--yellow);border-color:var(--yellow);
  color:#101318
 }
@@ -71,14 +60,29 @@ p{line-height:1.5}
  border:2px solid var(--yellow);border-radius:13px;
  padding:14px;margin-top:10px;background:#34321f
 }
-.entry h3{font-size:19px;margin:0 0 9px}
 .spec{
  display:grid;grid-template-columns:42% 1fr;
  border-top:1px solid #596071;padding:9px 0;gap:8px
 }
 .spec span:first-child{color:#c2ccda;font-size:13px}
 .spec strong{overflow-wrap:anywhere}
-.entry .toolbar{margin-top:10px}
+.empty{
+ border:1px dashed #66758a;border-radius:12px;
+ padding:18px;color:#c9d4e0;margin-top:10px
+}
+.table-scroll{overflow-x:auto;margin-top:12px}
+table{
+ width:100%;border-collapse:collapse;
+ font-size:13px;min-width:670px
+}
+th,td{
+ border:1px solid #526071;padding:10px 8px;
+ text-align:left;vertical-align:top
+}
+th{background:#344254}
+td{background:#232e3a}
+tr:nth-child(even) td{background:#293544}
+td:first-child{font-weight:800;color:var(--yellow)}
 label{
  display:block;color:#c9d4e0;font-size:13px;
  font-weight:750;margin-top:12px
@@ -96,10 +100,6 @@ dialog{
  color:white;padding:18px
 }
 dialog::backdrop{background:#000b}
-.empty{
- border:1px dashed #66758a;border-radius:12px;
- padding:18px;color:#c9d4e0
-}
 .footer{
  font-size:12px;color:#9aaabc;
  margin-top:23px;line-height:1.6
@@ -115,12 +115,13 @@ textarea:focus-visible{
 </head>
 <body>
 <main>
-<div class="eyebrow">FIELD QUICK REFERENCE</div>
 <h1>Chainsaw Sharpening</h1>
-<p class="muted">Reference update: 1/4″ chart entries • v10</p>
+<p class="muted">
+Reference update: Woodcutter Supply conversion chart • v11
+</p>
 <p class="muted">
 Choose chain pitch and gauge to view sharpening
-reference lines from your chart.
+reference lines and chain conversion information.
 </p>
 
 <section class="panel">
@@ -147,60 +148,77 @@ reference lines from your chart.
 </button>
 </div>
 <div id="entries"></div>
+
+<section class="panel">
+<h2>Woodcutter Supply — Chain Conversion Chart</h2>
+<p class="muted">
+Reference chart showing chain pitch, gauge, cutter type,
+chain sequence, safety-chain designation and
+manufacturer part numbers.
+</p>
+<p class="muted">
+Showing the chart rows for the selected chain pitch.
+Scroll horizontally to see all manufacturer columns.
+</p>
+<div class="table-scroll">
+<table>
+<thead>
+<tr>
+<th>Gauge</th>
+<th>Cutter</th>
+<th>Sequence</th>
+<th>Safety</th>
+<th>Oregon</th>
+<th>Carlton</th>
+<th>Husqvarna</th>
+<th>Stihl</th>
+</tr>
+</thead>
+<tbody id="conversionRows"></tbody>
+</table>
+</div>
+</section>
 </section>
 
 <section class="panel">
 <h2>Manage reference data</h2>
 <p class="muted">
-Built-in reference lines are included in this app.
-Your edits are stored in this browser. Export a
-backup before clearing browser data or switching devices.
+Your edits are saved in this browser.
+Export a backup before clearing browser data.
 </p>
 <div class="toolbar">
 <button class="action" id="export">Export backup</button>
 <button class="action" id="import">Import backup</button>
 <input id="file" type="file"
- accept=".json,application/json" hidden>
+accept=".json,application/json" hidden>
 </div>
 </section>
 
 <p class="footer">
-Verify all specifications against the original PDF
-and current manufacturer instructions. This app is
-a convenience reference, not an approved manufacturer
-document.
+Verify all sharpening specifications against the original
+chart and current manufacturer instructions.
+This is a convenience reference, not an approved
+manufacturer document. The Woodcutter Supply conversion
+chart is a separate source and does not establish
+sharpening angles.
 </p>
 </main>
 
 <dialog id="editor">
 <form id="form">
 <h2 id="editorTitle">Reference line</h2>
-<label>Chain model
-<input id="model" required maxlength="120">
-</label>
-<label>Grinding wheel width
-<input id="wheelWidth">
-</label>
-<label>Vise angle
-<input id="viseAngle">
-</label>
-<label>Top-plate angle
-<input id="topAngle">
-</label>
-<label>Tilt angle
-<input id="sideAngle">
-</label>
-<label>Depth gauge
-<input id="depth">
-</label>
-<label>Notes
-<textarea id="notes"></textarea>
-</label>
-<div class="toolbar" style="margin-top:18px">
-<button type="submit" class="action primary">
+<label>Chain model<input id="model" required></label>
+<label>Grinding wheel width<input id="wheelWidth"></label>
+<label>Vise angle<input id="viseAngle"></label>
+<label>Top-plate angle<input id="topAngle"></label>
+<label>Tilt angle<input id="sideAngle"></label>
+<label>Depth gauge<input id="depth"></label>
+<label>Notes<textarea id="notes"></textarea></label>
+<div class="toolbar">
+<button class="action primary" type="submit">
 Save reference
 </button>
-<button type="button" class="action" id="cancel">
+<button class="action" type="button" id="cancel">
 Cancel
 </button>
 </div>
@@ -220,18 +238,15 @@ const G=[
  ".080″ / 2.0 mm"
 ];
 
-const GAUGE_MAP={
- 43:G[0],50:G[1],58:G[2],63:G[3],80:G[4]
-};
+const GM={43:G[0],50:G[1],58:G[2],63:G[3],80:G[4]};
 
 /*
-Data columns:
-Oregon model, gauge, vise angle,
-top-plate angle, tilt angle,
-Windsor, Sarp, Carlton, Stihl, EM.
+Sharpening data:
+Model, gauge, vise angle, top-plate angle,
+tilt angle, Windsor, Sarp, Carlton, Stihl, EM.
 */
 
-const ROWS_325=[
+const R325=[
 ["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
 ["21BP",58,"30","55 / 60","10","58J","528","K2C","25RM","S27"],
 ["22BP",63,"30","55 / 60","10","63J","523","K3C","26RM2","S28"],
@@ -247,7 +262,7 @@ const ROWS_325=[
 ["95R",50,"5","50","0","","","","",""]
 ];
 
-const ROWS_375=[
+const R375=[
 ["M73LP",58,"25","60","10","","","","",""],
 ["M75LP",63,"25","60","10","","","","",""],
 ["72D",50,"35","55 / 60","0","","","","",""],
@@ -272,7 +287,7 @@ const ROWS_375=[
 ["91P",50,"30","60","0","","","N1C","63PM",""]
 ];
 
-const ROWS_404=[
+const R404=[
 ["26",58,"35","60","10","58B","","","",""],
 ["26P",58,"35","60","10","","858","B2EP","",""],
 ["27",63,"35","55 / 60","10","63B","","B3RM35","46RM",""],
@@ -287,40 +302,32 @@ const ROWS_404=[
 ["18H",80,"35","60","10","2HC","MKII2000","B5M","40RMH",""]
 ];
 
-/*
-1/4-inch section from the original PDF.
-The PDF has one row under this pitch:
-25AP, .050 gauge.
-*/
-const ROWS_250=[
+const R250=[
 ["25AP",50,"30","55 / 60","10","50K","16","E1MC","13RM","S00"]
 ];
 
 function makeEntries(rows,pitch,prefix){
  return rows.map((r,i)=>{
   const brands={Oregon:r[0]};
-
-  ["Windsor","Sarp","Carlton","Stihl","EM"].forEach(
-   (name,j)=>{
+  ["Windsor","Sarp","Carlton","Stihl","EM"]
+   .forEach((name,j)=>{
     if(r[j+5])brands[name]=r[j+5];
-   }
-  );
+   });
 
   const is404=pitch===".404″";
   const isH=is404&&["16H","18H"].includes(r[0]);
-  const isQuarter=pitch==="1/4″";
 
   return {
    id:prefix+"-"+String(i+1).padStart(2,"0"),
    pitch,
-   gauge:GAUGE_MAP[r[1]],
+   gauge:GM[r[1]],
    model:r[0],
    viseAngle:r[2]+"°",
    topAngle:r[3]+"°",
    sideAngle:r[4]+"°",
    wheelWidth:is404
     ?"3/16″ / 4.8 mm"
-    :isQuarter||pitch===".325″"
+    :pitch===".325″"||pitch==="1/4″"
      ?"1/8″ / 3.2 mm"
      :r[0]==="91P"
       ?""
@@ -331,20 +338,61 @@ function makeEntries(rows,pitch,prefix){
      ?".030″ / 0.76 mm"
      :".025″ / 0.63 mm",
    brands,
-   notes:"Source: Chainsaw Sharpening.pdf — DIMENSIONS table. Verify against current manufacturer instructions.",
+   notes:"Verify specifications against the original sharpening chart.",
    source:"pdf"
   };
  });
 }
 
 const BUILTIN=[
- ...makeEntries(ROWS_325,".325″","pdf-325"),
- ...makeEntries(ROWS_375,"3/8″","pdf-375"),
- ...makeEntries(ROWS_404,".404″","pdf-404"),
- ...makeEntries(ROWS_250,"1/4″","pdf-250")
+ ...makeEntries(R325,".325″","pdf-325"),
+ ...makeEntries(R375,"3/8″","pdf-375"),
+ ...makeEntries(R404,".404″","pdf-404"),
+ ...makeEntries(R250,"1/4″","pdf-250")
 ];
 
-const KEY="chainsaw-user-references-v10";
+/*
+Woodcutter Supply conversion chart.
+Columns:
+Pitch, gauge, cutter, sequence, safety,
+Oregon, Carlton, Husqvarna, Stihl.
+
+The chart's 3/8 Lo Pro rows are grouped
+under the existing 3/8 tab.
+The chart also has a 3/4 harvester row,
+which is not shown because this app has
+no 3/4 pitch tab.
+*/
+
+const CONVERSIONS=[
+["1/4″",".050","Semi Chisel","Standard","Yes","25AP","E1MC","H100","13RM1"],
+["3/8″",".043","Semi Chisel","Standard","Yes","90SG","N4C-BL","","61PMN1"],
+["3/8″",".050","Semi Chisel","Standard","Yes","91VG","N1C-BL","H36/43X","63PM1"],
+["3/8″",".050","Semi Chisel","Standard","No","91VX","N1C","H35","63PM"],
+[".325″",".050","Chisel","Standard","Yes","20BPX","K1L-BL","H22/S22","23RM"],
+[".325″",".050","Chisel","Standard","No","20LPX","K1L","H23/S23","23RS"],
+[".325″",".058","Chisel","Standard","Yes","21BPX","K2L-BL","H25/S25","25RMC"],
+[".325″",".058","Chisel","Standard","No","21LPX","K2L","H21/S21","25RS"],
+[".325″",".063","Chisel","Standard","Yes","22BPX","K3L-BL","H26/S26","26RMC"],
+[".325″",".063","Chisel","Standard","No","22LPX","K3L","H26",""],
+["3/8″",".050","Chisel","Standard","No","72LGX","A1LM","H47","33RS1"],
+["3/8″",".050","Chisel","Standard","No","72LPX","A1LM-GL","H46",""],
+["3/8″",".050","Chisel","Standard","Yes","72V","A1LM-GL","H80","33RM2"],
+["3/8″",".058","Chisel","Standard","No","73LGX","A2LM","H48","35RS"],
+["3/8″",".058","Chisel","Standard","No","73LPX","A2LM-GL","H41/H42",""],
+["3/8″",".058","Chisel","Standard","Yes","73V","A2LM-GL","H81",""],
+["3/8″",".063","Chisel","Standard","No","75LGX","A3LM","H45","36RS"],
+["3/8″",".063","Chisel","Standard","No","75LPX","A3LM-GL","",""],
+["3/8″",".063","Chisel","Standard","Yes","75V","A3LM-GL","","36RSC3"],
+["3/8″",".050","Chisel","Skip Tooth","No","72JGX","A1LM-SK","","33RSF"],
+["3/8″",".058","Chisel","Skip Tooth","No","73JGX","A2LM-SK","",""],
+["3/8″",".063","Chisel","Skip Tooth","No","75JGX","A3LM-SK","",""],
+[".404″",".063","Chisel","Standard","No","68LX","B3LM","H57/S57","46RS"],
+[".404″",".063","Harvester","Standard","No","16H","B3M","","46RMH"],
+[".404″",".080","Harvester","Standard","No","18HX","B5M","","40RMHS"]
+];
+
+const KEY="chainsaw-user-references-v11";
 
 let pitch=".325″";
 let gauge=G[3];
@@ -354,27 +402,18 @@ let hiddenIds=[];
 
 const $=id=>document.getElementById(id);
 
-function escapeHTML(s){
+function esc(s){
  return String(s??"").replace(/[&<>"']/g,c=>({
-  "&":"&amp;",
-  "<":"&lt;",
-  ">":"&gt;",
-  '"':"&quot;",
-  "'":"&#39;"
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
  }[c]));
 }
 
 function availableGauges(){
  return G.filter(g=>{
-  // .043 only appears under 3/8.
   if(g===G[0]&&pitch!=="3/8″")return false;
-
-  // .050 is hidden under .404.
   if(g===G[1]&&pitch===".404″")return false;
-
-  // .080 only appears under .404.
   if(g===G[4]&&pitch!==".404″")return false;
-
   return true;
  });
 }
@@ -382,40 +421,33 @@ function availableGauges(){
 function load(){
  const keys=[
   KEY,
+  "chainsaw-user-references-v10",
   "chainsaw-user-references-v8",
   "chainsaw-user-references-v6",
   "chainsaw-user-references-v5"
  ];
-
  for(const key of keys){
   try{
    const raw=localStorage.getItem(key);
    if(!raw)continue;
-
    const saved=JSON.parse(raw);
    if(!saved||!Array.isArray(saved.custom))continue;
-
    custom=saved.custom.filter(x=>
     x&&typeof x.id==="string"&&
     typeof x.model==="string"&&
     P.includes(x.pitch)&&G.includes(x.gauge)
    );
-
    hiddenIds=Array.isArray(saved.hiddenIds)
     ?saved.hiddenIds:[];
-
    break;
-  }catch(e){
-   console.warn("Could not load saved data",e);
-  }
+  }catch(e){}
  }
 }
 
 function save(){
  try{
   localStorage.setItem(
-   KEY,
-   JSON.stringify({custom,hiddenIds})
+   KEY,JSON.stringify({custom,hiddenIds})
   );
  }catch(e){
   alert("Unable to save changes on this device.");
@@ -423,42 +455,28 @@ function save(){
 }
 
 function allEntries(){
- const replacements=new Map(
-  custom.map(x=>[x.id,x])
- );
-
+ const replacements=new Map(custom.map(x=>[x.id,x]));
  const builtins=BUILTIN
   .filter(x=>!hiddenIds.includes(x.id))
   .map(x=>replacements.get(x.id)||x);
-
  const extras=custom.filter(x=>
   !BUILTIN.some(b=>b.id===x.id)
  );
-
  return [...builtins,...extras];
 }
 
 function render(){
  const allowed=availableGauges();
-
- if(!allowed.includes(gauge)){
-  gauge=allowed[0];
- }
+ if(!allowed.includes(gauge))gauge=allowed[0];
 
  $("pitches").innerHTML=P.map(p=>
-  `<button type="button"
-   data-pitch="${escapeHTML(p)}"
-   aria-pressed="${p===pitch}">
-   ${escapeHTML(p)}
-  </button>`
+  `<button type="button" data-pitch="${esc(p)}"
+   aria-pressed="${p===pitch}">${esc(p)}</button>`
  ).join("");
 
  $("gauges").innerHTML=allowed.map(g=>
-  `<button type="button"
-   data-gauge="${escapeHTML(g)}"
-   aria-pressed="${g===gauge}">
-   ${escapeHTML(g)}
-  </button>`
+  `<button type="button" data-gauge="${esc(g)}"
+   aria-pressed="${g===gauge}">${esc(g)}</button>`
  ).join("");
 
  $("current").textContent=pitch+" / "+gauge;
@@ -470,56 +488,57 @@ function render(){
  $("count").textContent=
   matches.length+" matching reference lines";
 
- if(!matches.length){
-  $("entries").innerHTML=
-   '<div class="empty">No reference lines for this combination. Use Add reference line to enter a verified chain model.</div>';
-  return;
- }
+ $("entries").innerHTML=matches.length
+  ?matches.map(x=>{
+   const fields=[
+    ["Gauge",x.gauge],
+    ["Vise angle",x.viseAngle],
+    ["Top-plate angle",x.topAngle],
+    ["Tilt angle",x.sideAngle],
+    ["Depth gauge",x.depth],
+    ["Wheel width",x.wheelWidth],
+    ...Object.entries(x.brands||{}),
+    ["Notes",x.notes]
+   ].filter(([k,v])=>v);
 
- $("entries").innerHTML=matches.map(x=>{
-  const fields=[
-   ["Gauge",x.gauge],
-   ["Vise angle",x.viseAngle],
-   ["Top-plate angle",x.topAngle],
-   ["Tilt angle",x.sideAngle],
-   ["Depth gauge",x.depth],
-   ["Wheel width",x.wheelWidth],
-   ...Object.entries(x.brands||{}),
-   ["Notes",x.notes]
-  ].filter(([k,v])=>v);
+   return `<article class="entry">
+    <h3>${esc(x.model)}</h3>
+    ${fields.map(([k,v])=>
+     `<div class="spec"><span>${esc(k)}</span>
+      <strong>${esc(v)}</strong></div>`
+    ).join("")}
+    <div class="toolbar">
+     <button class="action" data-edit="${esc(x.id)}">
+      Edit</button>
+     <button class="action" data-delete="${esc(x.id)}">
+      Delete</button>
+    </div>
+   </article>`;
+  }).join("")
+  :'<div class="empty">No sharpening reference lines for this combination.</div>';
 
-  return `<article class="entry">
-   <h3>${escapeHTML(x.model)}</h3>
-   ${fields.map(([k,v])=>
-    `<div class="spec">
-     <span>${escapeHTML(k)}</span>
-     <strong>${escapeHTML(v)}</strong>
-    </div>`
-   ).join("")}
-   <div class="toolbar">
-    <button class="action"
-     data-edit="${escapeHTML(x.id)}">Edit</button>
-    <button class="action"
-     data-delete="${escapeHTML(x.id)}">Delete</button>
-   </div>
-  </article>`;
- }).join("");
+ // Display conversion rows for the selected pitch.
+ // All gauges for that pitch are included.
+ const conversions=CONVERSIONS.filter(r=>r[0]===pitch);
+
+ $("conversionRows").innerHTML=conversions.map(r=>
+  `<tr>${r.slice(1).map(v=>
+   `<td>${esc(v||"—")}</td>`
+  ).join("")}</tr>`
+ ).join("");
 }
 
 function openEditor(id=null){
  editing=id;
  const x=allEntries().find(v=>v.id===id)||{};
-
  $("editorTitle").textContent=
   id?"Edit reference line":"Add reference line";
-
  for(const k of [
   "model","wheelWidth","viseAngle",
   "topAngle","sideAngle","depth","notes"
  ]){
   $(k).value=x[k]||"";
  }
-
  $("editor").showModal();
 }
 
@@ -529,32 +548,17 @@ document.addEventListener("click",e=>{
  const ed=e.target.closest("[data-edit]");
  const del=e.target.closest("[data-delete]");
 
- if(p){
-  pitch=p.dataset.pitch;
-  render();
- }
-
- if(g){
-  gauge=g.dataset.gauge;
-  render();
- }
-
- if(ed){
-  openEditor(ed.dataset.edit);
- }
+ if(p){pitch=p.dataset.pitch;render();}
+ if(g){gauge=g.dataset.gauge;render();}
+ if(ed)openEditor(ed.dataset.edit);
 
  if(del&&confirm("Delete this reference line?")){
   const id=del.dataset.delete;
-
   custom=custom.filter(x=>x.id!==id);
-
   if(
    BUILTIN.some(x=>x.id===id)&&
    !hiddenIds.includes(id)
-  ){
-   hiddenIds.push(id);
-  }
-
+  )hiddenIds.push(id);
   save();
   render();
  }
@@ -565,7 +569,6 @@ $("cancel").onclick=()=>$("editor").close();
 
 $("form").onsubmit=e=>{
  e.preventDefault();
-
  const old=editing
   ?allEntries().find(x=>x.id===editing)
   :null;
@@ -573,7 +576,7 @@ $("form").onsubmit=e=>{
  const item={
   ...(old||{}),
   id:editing||(
-   window.crypto&&crypto.randomUUID
+   crypto.randomUUID
     ?crypto.randomUUID()
     :"custom-"+Date.now()
   ),
@@ -585,14 +588,11 @@ $("form").onsubmit=e=>{
  for(const k of [
   "model","wheelWidth","viseAngle",
   "topAngle","sideAngle","depth","notes"
- ]){
-  item[k]=$(k).value.trim();
- }
+ ])item[k]=$(k).value.trim();
 
  custom=custom.filter(x=>x.id!==item.id);
  custom.push(item);
  hiddenIds=hiddenIds.filter(id=>id!==item.id);
-
  save();
  $("editor").close();
  render();
@@ -601,19 +601,15 @@ $("form").onsubmit=e=>{
 $("export").onclick=()=>{
  const blob=new Blob([
   JSON.stringify({
-   version:10,
-   custom,
-   hiddenIds
+   version:11,custom,hiddenIds
   },null,2)
  ],{type:"application/json"});
 
  const url=URL.createObjectURL(blob);
  const a=document.createElement("a");
-
  a.href=url;
  a.download="chainsaw-reference-backup.json";
  a.click();
-
  setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
@@ -622,14 +618,13 @@ $("import").onclick=()=>$("file").click();
 $("file").onchange=async e=>{
  const f=e.target.files[0];
  if(!f)return;
-
  try{
   const parsed=JSON.parse(await f.text());
   let incoming;
   let hidden=[];
 
   if(
-   [5,6,8,10].includes(parsed.version)&&
+   [5,6,8,10,11].includes(parsed.version)&&
    Array.isArray(parsed.custom)
   ){
    incoming=parsed.custom;
@@ -642,36 +637,25 @@ $("file").onchange=async e=>{
    incoming=parsed.entries.filter(
     x=>x.source!=="pdf"
    );
-  }else{
-   throw Error("Invalid backup format");
-  }
+  }else throw Error("Invalid backup");
 
   if(!incoming.every(x=>
    x&&typeof x.id==="string"&&
    typeof x.model==="string"&&
    P.includes(x.pitch)&&G.includes(x.gauge)
-  )){
-   throw Error("Invalid entries");
-  }
+  ))throw Error("Invalid entries");
 
-  if(confirm("Replace your saved edits with this backup?")){
+  if(confirm("Replace saved edits with this backup?")){
    custom=incoming;
    hiddenIds=hidden;
    save();
    render();
   }
- }catch(err){
+ }catch(e){
   alert("Unable to import this backup.");
  }
-
  e.target.value="";
 };
-
-if("serviceWorker" in navigator){
- navigator.serviceWorker.getRegistrations()
-  .then(regs=>regs.forEach(reg=>reg.unregister()))
-  .catch(()=>{});
-}
 
 load();
 render();
