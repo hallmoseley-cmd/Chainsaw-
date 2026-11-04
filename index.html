@@ -6,13 +6,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0e1218">
 <title>Chainsaw Sharpening Reference</title>
+
 <style>
 :root{
  color-scheme:dark;
  --bg:#0e1218;
  --card:#1b232e;
  --border:#354252;
- --text:#f6f8fc;
  --muted:#b7c5d5;
  --yellow:#ffdf39;
 }
@@ -20,21 +20,27 @@
 body{
  margin:0;
  background:var(--bg);
- color:var(--text);
+ color:#f6f8fc;
  font:16px -apple-system,BlinkMacSystemFont,
  "Segoe UI",Arial,sans-serif;
 }
 main{
  max-width:800px;
  margin:auto;
- padding:20px 16px 70px;
+ padding:20px 16px 65px;
 }
 h1{font-size:28px;margin:4px 0 8px}
 h2{font-size:17px;margin:0 0 14px}
-h3{font-size:16px;margin:0 0 10px}
-p{line-height:1.5}
-.muted{color:var(--muted);font-size:13px}
-.version{color:var(--yellow);font-size:12px}
+h3{font-size:19px;margin:0 0 10px}
+.muted{
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.5;
+}
+.version{
+ color:var(--yellow);
+ font-size:12px;
+}
 .panel{
  background:var(--card);
  border:1px solid var(--border);
@@ -72,8 +78,8 @@ p{line-height:1.5}
  min-height:48px;
  cursor:pointer;
 }
-.choices button[aria-pressed="true"],
-.gauge button[aria-pressed="true"]{
+.choices button[aria-pressed=true],
+.gauge button[aria-pressed=true]{
  background:var(--yellow);
  color:#111;
  border-color:white;
@@ -88,27 +94,6 @@ p{line-height:1.5}
  color:var(--yellow);
  overflow-wrap:anywhere;
 }
-.toolbar{
- display:flex;
- flex-wrap:wrap;
- gap:9px;
- margin:10px 0;
-}
-.action{
- background:#2c394a;
- border:1px solid #6b7c8f;
- color:white;
- border-radius:11px;
- padding:12px 14px;
- min-height:46px;
- font-weight:750;
- cursor:pointer;
-}
-.primary{
- background:var(--yellow);
- border-color:var(--yellow);
- color:#101318;
-}
 .entry{
  border:2px solid var(--yellow);
  border-radius:13px;
@@ -116,7 +101,6 @@ p{line-height:1.5}
  margin-top:12px;
  background:#34321f;
 }
-.entry h3{font-size:19px}
 .spec{
  display:grid;
  grid-template-columns:42% 1fr;
@@ -128,7 +112,9 @@ p{line-height:1.5}
  color:#c2ccda;
  font-size:13px;
 }
-.spec strong{overflow-wrap:anywhere}
+.spec strong{
+ overflow-wrap:anywhere;
+}
 .empty{
  border:1px dashed #66758a;
  border-radius:12px;
@@ -136,95 +122,60 @@ p{line-height:1.5}
  color:#c9d4e0;
  margin-top:10px;
 }
-.conversion{
- background:#202b37;
- border:1px solid #526173;
- border-radius:12px;
- padding:14px;
- margin-top:12px;
-}
-.conversion h3{
- color:var(--yellow);
- font-size:18px;
-}
-.conversion .spec{
- grid-template-columns:38% 1fr;
-}
-.tag{
- display:inline-block;
- background:#34475b;
- border-radius:6px;
- padding:4px 7px;
- font-size:12px;
- color:#fff;
- margin-bottom:9px;
-}
-.source-heading{
- margin-top:26px;
- padding-top:18px;
- border-top:2px solid #637285;
-}
-summary{
- cursor:pointer;
- font-weight:750;
- padding:12px 0;
-}
-label{
- display:block;
- color:#c9d4e0;
- font-size:13px;
- font-weight:750;
- margin-top:12px;
-}
-input,textarea{
+.chart{
  display:block;
  width:100%;
- font:inherit;
- background:#111923;
- color:white;
- border:1px solid #718198;
- border-radius:9px;
- padding:12px;
- margin-top:5px;
+ height:auto;
+ background:white;
+ border-radius:8px;
 }
-textarea{min-height:85px}
-dialog{
- width:min(94vw,560px);
- border:1px solid #748294;
- border-radius:17px;
- background:#1b232e;
- color:white;
- padding:18px;
+.chart-wrap{
+ overflow:auto;
+ border-radius:8px;
 }
-dialog::backdrop{background:#000b}
+.chart-wrap.zoom .chart{
+ width:1100px;
+ max-width:none;
+}
+.action{
+ background:var(--yellow);
+ color:#111;
+ border:0;
+ border-radius:10px;
+ padding:12px 16px;
+ font-weight:800;
+ cursor:pointer;
+ margin-bottom:12px;
+}
 .footer{
  font-size:12px;
  color:#9aaabc;
  margin-top:24px;
  line-height:1.6;
 }
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-summary:focus-visible{
+button:focus-visible{
  outline:3px solid white;
  outline-offset:2px;
 }
 @media(min-width:600px){
- .choices{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .choices{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+ }
 }
 </style>
 </head>
 
 <body>
 <main>
+
 <h1>Chainsaw Sharpening</h1>
 <p class="version">
-Version 12 — Complete Woodcutter Supply Conversion Chart
+Version 17 — Sharpening Reference
 </p>
+
 <p class="muted">
-Choose a chain pitch and gauge to view sharpening
-reference lines and manufacturer chain conversions.
+Choose chain pitch and gauge to view sharpening
+reference lines from your original chart.
 </p>
 
 <section class="panel">
@@ -245,112 +196,50 @@ reference lines and manufacturer chain conversions.
 
 <section class="panel">
 <h2>Matching reference lines</h2>
-<div class="toolbar">
-<button class="action primary" id="add">
-+ Add reference line
-</button>
-</div>
 <div id="entries"></div>
-
-<div class="source-heading">
-<h2>Woodcutter Supply — Chain Conversion Reference</h2>
-<p class="muted">
-Source: Woodcutter Supply ©2012,
-"Conversion by specifications."
-</p>
-<p class="muted">
-All conversion rows for the selected pitch are
-shown below. Rows are grouped by pitch, rather
-than filtered by the selected gauge, so you can
-compare different gauges.
-</p>
-<div id="conversionCount" class="muted"></div>
-<div id="conversions"></div>
-</div>
-
-<details>
-<summary>Additional PDF row — 3/4″ Harvester Chain</summary>
-<div id="extraConversion"></div>
-</details>
 </section>
 
 <section class="panel">
-<h2>Manage reference data</h2>
+<h2>Woodcutter Supply — Original Conversion Chart</h2>
+
 <p class="muted">
-Your added and edited sharpening reference lines
-are saved in this browser. Export a backup before
-clearing browser data or switching devices.
+The supplied conversion chart is displayed under
+all four chain pitch selections. It is separate
+from the sharpening specifications above.
 </p>
-<div class="toolbar">
-<button class="action" id="export">
-Export backup
+
+<button
+ type="button"
+ class="action"
+ id="zoom"
+ aria-pressed="false">
+ Enlarge chart
 </button>
-<button class="action" id="import">
-Import backup
-</button>
-<input id="file" type="file"
-accept=".json,application/json" hidden>
+
+<div class="chart-wrap" id="chartWrap">
+<img
+ class="chart"
+ src="chart.jpg"
+ alt="Woodcutter Supply chain conversion chart
+ showing pitch, gauge, cutter type and
+ Oregon, Carlton, Husqvarna and Stihl
+ part numbers">
 </div>
 </section>
 
 <p class="footer">
-Sharpening specifications and chain-conversion
-information are separate references. Verify all
-settings and manufacturer part numbers against
-current manufacturer documentation before use.
-The Woodcutter Supply chart is dated 2012 and
-may not reflect current product designations.
+Verify all sharpening specifications against the
+original chart and current manufacturer instructions.
+This application is a convenience reference and is
+not an approved manufacturer document.
 </p>
-</main>
 
-<dialog id="editor">
-<form id="form">
-<h2 id="editorTitle">Reference line</h2>
-<label>
-Chain model
-<input id="model" required maxlength="120">
-</label>
-<label>
-Grinding wheel width
-<input id="wheelWidth">
-</label>
-<label>
-Vise angle
-<input id="viseAngle">
-</label>
-<label>
-Top-plate angle
-<input id="topAngle">
-</label>
-<label>
-Tilt angle
-<input id="sideAngle">
-</label>
-<label>
-Depth gauge
-<input id="depth">
-</label>
-<label>
-Notes
-<textarea id="notes"></textarea>
-</label>
-<div class="toolbar">
-<button class="action primary" type="submit">
-Save reference
-</button>
-<button class="action" type="button" id="cancel">
-Cancel
-</button>
-</div>
-</form>
-</dialog>
+</main>
 
 <script>
 "use strict";
 
-/* ==========================================
-   PITCH AND GAUGE SELECTIONS
-========================================== */
+/* PITCH AND GAUGE OPTIONS */
 
 const P=[
  ".325″",
@@ -375,28 +264,14 @@ const GM={
  80:G[4]
 };
 
-function availableGauges(){
- return G.filter(g=>{
-  // .043 is only shown under 3/8.
-  if(g===G[0]&&pitch!=="3/8″")return false;
+/*
+REFERENCE DATA COLUMNS:
+Model, Gauge, Vise angle, Top-plate angle,
+Tilt angle, Windsor, Sarp, Carlton, Stihl, EM.
 
-  // .050 is hidden under .404.
-  if(g===G[1]&&pitch===".404″")return false;
-
-  // .080 is only shown under .404.
-  if(g===G[4]&&pitch!==".404″")return false;
-
-  return true;
- });
-}
-
-/* ==========================================
-   ORIGINAL SHARPENING REFERENCE DATA
-   Row columns:
-   Model, gauge, vise angle, top angle,
-   tilt angle, Windsor, Sarp, Carlton,
-   Stihl, EM
-========================================== */
+EM values are retained in the source arrays
+but are not displayed.
+*/
 
 const R325=[
 ["20BP",50,"30","55 / 60","10","50J","520","K1C","23RM2",""],
@@ -458,26 +333,33 @@ const R250=[
 ["25AP",50,"30","55 / 60","10","50K","16","E1MC","13RM","S00"]
 ];
 
-function makeEntries(rows,pitch,prefix){
- return rows.map((r,i)=>{
-  const brands={Oregon:r[0]};
+/* BUILD REFERENCE CARDS */
 
-  ["Windsor","Sarp","Carlton","Stihl","EM"]
+function makeEntries(rows,pitch){
+ return rows.map(r=>{
+  const brands={
+   Oregon:r[0]
+  };
+
+  ["Windsor","Sarp","Carlton","Stihl"]
    .forEach((name,j)=>{
-    if(r[j+5])brands[name]=r[j+5];
+    if(r[j+5]){
+     brands[name]=r[j+5];
+    }
    });
 
   const is404=pitch===".404″";
-  const isH=is404&&["16H","18H"].includes(r[0]);
+  const isH=is404&&
+   ["16H","18H"].includes(r[0]);
 
   return {
-   id:prefix+"-"+String(i+1).padStart(2,"0"),
    pitch:pitch,
    gauge:GM[r[1]],
    model:r[0],
    viseAngle:r[2]+"°",
    topAngle:r[3]+"°",
    sideAngle:r[4]+"°",
+
    wheelWidth:is404
     ?"3/16″ / 4.8 mm"
     :pitch===".325″"||pitch==="1/4″"
@@ -485,90 +367,29 @@ function makeEntries(rows,pitch,prefix){
      :r[0]==="91P"
       ?""
       :"1/8″ / 3.2 mm – 3/16″ / 4.8 mm",
+
    depth:isH
     ?".050″ / 1.27 mm"
     :is404
      ?".030″ / 0.76 mm"
      :".025″ / 0.63 mm",
-   brands:brands,
-   notes:"Sharpening reference. Verify against original chart.",
-   source:"pdf"
+
+   brands:brands
   };
  });
 }
 
 const BUILTIN=[
- ...makeEntries(R325,".325″","pdf-325"),
- ...makeEntries(R375,"3/8″","pdf-375"),
- ...makeEntries(R404,".404″","pdf-404"),
- ...makeEntries(R250,"1/4″","pdf-250")
+ ...makeEntries(R325,".325″"),
+ ...makeEntries(R375,"3/8″"),
+ ...makeEntries(R404,".404″"),
+ ...makeEntries(R250,"1/4″")
 ];
 
-/* ==========================================
-   COMPLETE WOODCUTTER SUPPLY PDF DATA
-
-   Each row contains:
-   Pitch, gauge, cutter, chain sequence,
-   safety chain, Oregon, Carlton,
-   Husqvarna, Stihl.
-
-   The PDF's 3/8 Lo Pro rows are preserved
-   with their original pitch designation.
-========================================== */
-
-const CONVERSIONS=[
-
-/* 1/4 INCH */
-["1/4″",".050","Semi Chisel","Standard","Yes","25AP","E1MC","H100","13RM1"],
-
-/* 3/8 LOW PROFILE */
-["3/8 Lo Pro",".043","Semi Chisel","Standard","Yes","90SG","N4C-BL","","61PMN1"],
-["3/8 Lo Pro",".050","Semi Chisel","Standard","Yes","91VG","N1C-BL","H36/43X","63PM1"],
-["3/8 Lo Pro",".050","Semi Chisel","Standard","No","91VX","N1C","H35","63PM"],
-
-/* .325 INCH */
-[".325″",".050","Chisel","Standard","Yes","20BPX","K1L-BL","H22/S22","23RM"],
-[".325″",".050","Chisel","Standard","No","20LPX","K1L","H23/S23","23RS"],
-[".325″",".058","Chisel","Standard","Yes","21BPX","K2L-BL","H25/S25","25RMC"],
-[".325″",".058","Chisel","Standard","No","21LPX","K2L","H21/S21","25RS"],
-[".325″",".063","Chisel","Standard","Yes","22BPX","K3L-BL","H26/S26","26RMC"],
-[".325″",".063","Chisel","Standard","No","22LPX","K3L","H26",""],
-
-/* 3/8 INCH */
-["3/8″",".050","Chisel","Standard","No","72LGX","A1LM","H47","33RS1"],
-["3/8″",".050","Chisel","Standard","No","72LPX","A1LM-GL","H46",""],
-["3/8″",".050","Chisel","Standard","Yes","72V","A1LM-GL","H80","33RM2"],
-["3/8″",".058","Chisel","Standard","No","73LGX","A2LM","H48","35RS"],
-["3/8″",".058","Chisel","Standard","No","73LPX","A2LM-GL","H41/H42","35RS"],
-["3/8″",".058","Chisel","Standard","Yes","73V","A2LM-GL","H81",""],
-["3/8″",".063","Chisel","Standard","No","75LGX","A3LM","H45","36RS"],
-["3/8″",".063","Chisel","Standard","No","75LPX","A3LM-GL","",""],
-["3/8″",".063","Chisel","Standard","Yes","75V","A3LM-GL","","36RSC3"],
-["3/8″",".050","Chisel","Skip Tooth","No","72JGX","A1LM-SK","","33RSF"],
-["3/8″",".058","Chisel","Skip Tooth","No","73JGX","A2LM-SK","",""],
-["3/8″",".063","Chisel","Skip Tooth","No","75JGX","A3LM-SK","",""],
-
-/* .404 INCH */
-[".404″",".063","Chisel","Standard","No","68LX","B3LM","H57/S57","46RS"],
-[".404″",".063","Harvester","Standard","No","16H","B3M","","46RMH"],
-[".404″",".080","Harvester","Standard","No","18HX","B5M","","40RMHS"],
-
-/* 3/4 INCH */
-["3/4″",".122","Harvester","Standard","No","11BC","G7S","",""]
-
-];
-
-/* ==========================================
-   APP STORAGE
-========================================== */
-
-const KEY="chainsaw-user-references-v12";
+/* APP STATE */
 
 let pitch=".325″";
 let gauge=G[3];
-let editing=null;
-let custom=[];
-let hiddenIds=[];
 
 const $=id=>document.getElementById(id);
 
@@ -582,99 +403,36 @@ function esc(s){
  }[c]));
 }
 
-function load(){
- const keys=[
-  KEY,
-  "chainsaw-user-references-v11",
-  "chainsaw-user-references-v10",
-  "chainsaw-user-references-v8",
-  "chainsaw-user-references-v6",
-  "chainsaw-user-references-v5"
- ];
+/* GAUGE RESTRICTIONS */
 
- for(const key of keys){
-  try{
-   const raw=localStorage.getItem(key);
-   if(!raw)continue;
+function availableGauges(){
+ return G.filter(g=>{
 
-   const saved=JSON.parse(raw);
-   if(!saved||!Array.isArray(saved.custom))continue;
-
-   custom=saved.custom.filter(x=>
-    x&&typeof x.id==="string"&&
-    typeof x.model==="string"&&
-    P.includes(x.pitch)&&G.includes(x.gauge)
-   );
-
-   hiddenIds=Array.isArray(saved.hiddenIds)
-    ?saved.hiddenIds:[];
-
-   break;
-  }catch(e){
-   console.warn("Unable to load data",e);
+  // 1/4: only .050
+  if(pitch==="1/4″"){
+   return g===G[1];
   }
- }
+
+  // .043: only under 3/8
+  if(g===G[0]&&pitch!=="3/8″"){
+   return false;
+  }
+
+  // .050: hidden under .404
+  if(g===G[1]&&pitch===".404″"){
+   return false;
+  }
+
+  // .080: only under .404
+  if(g===G[4]&&pitch!==".404″"){
+   return false;
+  }
+
+  return true;
+ });
 }
 
-function save(){
- try{
-  localStorage.setItem(
-   KEY,
-   JSON.stringify({custom,hiddenIds})
-  );
- }catch(e){
-  alert("Unable to save changes in this browser.");
- }
-}
-
-function allEntries(){
- const replacements=new Map(
-  custom.map(x=>[x.id,x])
- );
-
- const builtins=BUILTIN
-  .filter(x=>!hiddenIds.includes(x.id))
-  .map(x=>replacements.get(x.id)||x);
-
- const extras=custom.filter(x=>
-  !BUILTIN.some(b=>b.id===x.id)
- );
-
- return [...builtins,...extras];
-}
-
-/* ==========================================
-   CONVERSION CARD DISPLAY
-========================================== */
-
-function conversionCard(r){
- const fields=[
-  ["Chain pitch",r[0]],
-  ["Chain gauge",r[1]+"″"],
-  ["Cutter",r[2]],
-  ["Chain sequence",r[3]],
-  ["Safety chain",r[4]],
-  ["Oregon part #",r[5]],
-  ["Carlton part #",r[6]],
-  ["Husqvarna part #",r[7]],
-  ["Stihl part #",r[8]]
- ];
-
- return `<article class="conversion">
-  <h3>${esc(r[5])}</h3>
-  <span class="tag">${esc(r[0])}</span>
-  ${fields.map(([label,value])=>
-   `<div class="spec">
-    <span>${esc(label)}</span>
-    <strong>${esc(value||"Not listed")}</strong>
-   </div>`
-  ).join("")}
- </article>`;
-}
-
-/* ==========================================
-   MAIN RENDER
-========================================== */
+/* DISPLAY REFERENCES */
 
 function render(){
  const allowed=availableGauges();
@@ -683,108 +441,70 @@ function render(){
   gauge=allowed[0];
  }
 
- $("pitches").innerHTML=P.map(p=>
-  `<button type="button"
-    data-pitch="${esc(p)}"
-    aria-pressed="${p===pitch}">
-    ${esc(p)}
-  </button>`
- ).join("");
+ $("pitches").innerHTML=P.map(p=>`
+  <button
+   type="button"
+   data-pitch="${esc(p)}"
+   aria-pressed="${p===pitch}">
+   ${esc(p)}
+  </button>
+ `).join("");
 
- $("gauges").innerHTML=allowed.map(g=>
-  `<button type="button"
-    data-gauge="${esc(g)}"
-    aria-pressed="${g===gauge}">
-    ${esc(g)}
-  </button>`
- ).join("");
+ $("gauges").innerHTML=allowed.map(g=>`
+  <button
+   type="button"
+   data-gauge="${esc(g)}"
+   aria-pressed="${g===gauge}">
+   ${esc(g)}
+  </button>
+ `).join("");
 
  $("current").textContent=pitch+" / "+gauge;
 
- const matches=allEntries().filter(x=>
+ const matches=BUILTIN.filter(x=>
   x.pitch===pitch&&x.gauge===gauge
  );
 
  $("count").textContent=
-  matches.length+" matching sharpening reference lines";
+  matches.length+" matching reference lines";
 
- $("entries").innerHTML=matches.length
-  ?matches.map(x=>{
-   const fields=[
-    ["Gauge",x.gauge],
-    ["Vise angle",x.viseAngle],
-    ["Top-plate angle",x.topAngle],
-    ["Tilt angle",x.sideAngle],
-    ["Depth gauge",x.depth],
-    ["Wheel width",x.wheelWidth],
-    ...Object.entries(x.brands||{}),
-    ["Notes",x.notes]
-   ].filter(([k,v])=>v);
-
-   return `<article class="entry">
-    <h3>${esc(x.model)}</h3>
-    ${fields.map(([k,v])=>
-     `<div class="spec">
-      <span>${esc(k)}</span>
-      <strong>${esc(v)}</strong>
-     </div>`
-    ).join("")}
-    <div class="toolbar">
-     <button class="action"
-      data-edit="${esc(x.id)}">Edit</button>
-     <button class="action"
-      data-delete="${esc(x.id)}">Delete</button>
-    </div>
-   </article>`;
-  }).join("")
-  :'<div class="empty">No sharpening reference lines for this combination.</div>';
-
- // Include low-profile entries under 3/8,
- // but preserve their distinct PDF pitch label.
- const conversions=CONVERSIONS.filter(r=>
-  r[0]===pitch||
-  (pitch==="3/8″"&&r[0]==="3/8 Lo Pro")
- );
-
- $("conversionCount").textContent=
-  conversions.length+" conversion chart entries for "+pitch;
-
- $("conversions").innerHTML=conversions.length
-  ?conversions.map(conversionCard).join("")
-  :'<div class="empty">No conversion entries.</div>';
-
- $("extraConversion").innerHTML=
-  CONVERSIONS.filter(r=>r[0]==="3/4″")
-   .map(conversionCard).join("");
-}
-
-/* ==========================================
-   EDITING
-========================================== */
-
-function openEditor(id=null){
- editing=id;
-
- const x=allEntries().find(v=>v.id===id)||{};
-
- $("editorTitle").textContent=
-  id?"Edit reference line":"Add reference line";
-
- for(const k of [
-  "model","wheelWidth","viseAngle",
-  "topAngle","sideAngle","depth","notes"
- ]){
-  $(k).value=x[k]||"";
+ if(!matches.length){
+  $("entries").innerHTML=
+   '<div class="empty">No sharpening reference lines for this combination.</div>';
+  return;
  }
 
- $("editor").showModal();
+ $("entries").innerHTML=matches.map(x=>{
+  const fields=[
+   ["Gauge",x.gauge],
+   ["Vise angle",x.viseAngle],
+   ["Top-plate angle",x.topAngle],
+   ["Tilt angle",x.sideAngle],
+   ["Depth gauge",x.depth],
+   ["Wheel width",x.wheelWidth],
+   ...Object.entries(x.brands||{})
+  ].filter(([name,value])=>value);
+
+  return `
+   <article class="entry">
+    <h3>${esc(x.model)}</h3>
+
+    ${fields.map(([name,value])=>`
+     <div class="spec">
+      <span>${esc(name)}</span>
+      <strong>${esc(value)}</strong>
+     </div>
+    `).join("")}
+   </article>
+  `;
+ }).join("");
 }
+
+/* PITCH AND GAUGE SELECTION */
 
 document.addEventListener("click",e=>{
  const p=e.target.closest("[data-pitch]");
  const g=e.target.closest("[data-gauge]");
- const ed=e.target.closest("[data-edit]");
- const del=e.target.closest("[data-delete]");
 
  if(p){
   pitch=p.dataset.pitch;
@@ -795,142 +515,28 @@ document.addEventListener("click",e=>{
   gauge=g.dataset.gauge;
   render();
  }
-
- if(ed){
-  openEditor(ed.dataset.edit);
- }
-
- if(del&&confirm("Delete this reference line?")){
-  const id=del.dataset.delete;
-
-  custom=custom.filter(x=>x.id!==id);
-
-  if(
-   BUILTIN.some(x=>x.id===id)&&
-   !hiddenIds.includes(id)
-  ){
-   hiddenIds.push(id);
-  }
-
-  save();
-  render();
- }
 });
 
-$("add").onclick=()=>openEditor();
-$("cancel").onclick=()=>$("editor").close();
+/* ENLARGE CHART */
 
-$("form").onsubmit=e=>{
- e.preventDefault();
+$("zoom").addEventListener("click",()=>{
+ const enlarged=$("chartWrap")
+  .classList.toggle("zoom");
 
- const old=editing
-  ?allEntries().find(x=>x.id===editing)
-  :null;
+ $("zoom").textContent=enlarged
+  ?"Fit chart to screen"
+  :"Enlarge chart";
 
- const item={
-  ...(old||{}),
-  id:editing||(
-   window.crypto&&crypto.randomUUID
-    ?crypto.randomUUID()
-    :"custom-"+Date.now()
-  ),
-  pitch:old?old.pitch:pitch,
-  gauge:old?old.gauge:gauge,
-  source:"user"
- };
+ $("zoom").setAttribute(
+  "aria-pressed",
+  String(enlarged)
+ );
+});
 
- for(const k of [
-  "model","wheelWidth","viseAngle",
-  "topAngle","sideAngle","depth","notes"
- ]){
-  item[k]=$(k).value.trim();
- }
+/* START APP */
 
- custom=custom.filter(x=>x.id!==item.id);
- custom.push(item);
-
- hiddenIds=hiddenIds.filter(id=>id!==item.id);
-
- save();
- $("editor").close();
- render();
-};
-
-/* ==========================================
-   EXPORT / IMPORT
-========================================== */
-
-$("export").onclick=()=>{
- const blob=new Blob([
-  JSON.stringify({
-   version:12,
-   custom,
-   hiddenIds
-  },null,2)
- ],{type:"application/json"});
-
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
-
- a.href=url;
- a.download="chainsaw-reference-backup.json";
- a.click();
-
- setTimeout(()=>URL.revokeObjectURL(url),1000);
-};
-
-$("import").onclick=()=>$("file").click();
-
-$("file").onchange=async e=>{
- const f=e.target.files[0];
- if(!f)return;
-
- try{
-  const parsed=JSON.parse(await f.text());
-  let incoming;
-  let hidden=[];
-
-  if(
-   [5,6,8,10,11,12].includes(parsed.version)&&
-   Array.isArray(parsed.custom)
-  ){
-   incoming=parsed.custom;
-   hidden=Array.isArray(parsed.hiddenIds)
-    ?parsed.hiddenIds:[];
-  }else if(
-   parsed.version===1&&
-   Array.isArray(parsed.entries)
-  ){
-   incoming=parsed.entries.filter(
-    x=>x.source!=="pdf"
-   );
-  }else{
-   throw Error("Invalid backup format");
-  }
-
-  if(!incoming.every(x=>
-   x&&typeof x.id==="string"&&
-   typeof x.model==="string"&&
-   P.includes(x.pitch)&&G.includes(x.gauge)
-  )){
-   throw Error("Invalid reference entries");
-  }
-
-  if(confirm("Replace saved edits with this backup?")){
-   custom=incoming;
-   hiddenIds=hidden;
-   save();
-   render();
-  }
- }catch(err){
-  alert("Unable to import this backup.");
- }
-
- e.target.value="";
-};
-
-load();
 render();
+
 </script>
 </body>
 </html>
